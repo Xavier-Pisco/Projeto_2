@@ -1,78 +1,107 @@
 #include "Address.h"
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 
-Address::Address(){
+Address::Address()
+{
+	this->street = "";
+	this->doorNumber = 0;
+	this->floor = "-";
+	this->postalCode = "";
+	this->location = "";
 }
 
-Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location){
+Address::Address(string address)
+{
+	street = address.substr(0, address.find_first_of('/'));
+	address.erase(0, address.find_first_of('/') + 1);
 
-  // REQUIRES IMPLEMENTATION
+	doorNumber = stoi(address.substr(0, address.find_first_of('/')));
+	address.erase(0, address.find_first_of('/') + 1);
+
+	floor = address.substr(0, address.find_first_of('/'));
+	address.erase(0, address.find_first_of('/') + 1);
+
+	postalCode = address.substr(0, address.find_first_of('/'));
+	address.erase(0, address.find_first_of('/') + 1);
+
+	location = address.substr(0, address.find_first_of('/'));
+	address.erase(0, address.find_first_of('/') + 1);
 }
 
-  // metodos GET
-
-
-string Address::getStreet() const{
-
-  // REQUIRES IMPLEMENTATION
+Address::Address(string street, unsigned short doorNumber, string floor, string postalCode, string location)
+{
+	this->street = street;
+	this->doorNumber = doorNumber;
+	this->floor = floor;
+	this->postalCode = postalCode;
+	this->location = location;
 }
 
-unsigned short Address::getDoorNumber() const{
+// metodos GET
+string Address::getStreet() const {
 
-  // REQUIRES IMPLEMENTATION
+	return street;
 }
 
-string Address::getFloor() const{
-  
-  // REQUIRES IMPLEMENTATION
+unsigned short Address::getDoorNumber() const {
+
+	return doorNumber;
 }
 
-string Address::getPostalCode() const{
+string Address::getFloor() const {
 
-  // REQUIRES IMPLEMENTATION
+	return floor;
 }
 
-string Address::getLocation() const{
+string Address::getPostalCode() const {
 
-  // REQUIRES IMPLEMENTATION
+	return postalCode;
 }
 
+string Address::getLocation() const {
 
-  // metodos SET
-
-void Address::setStreet(string street){
-
-  // REQUIRES IMPLEMENTATION
-}
-
-void Address::setDoorNumber(unsigned short doorNumber){
-
-  // REQUIRES IMPLEMENTATION
-}
-
-void Address::setFloor(string floor){
-
-  // REQUIRES IMPLEMENTATION
-}
-
-void Address::setPostalCode(string postalCode){
-
-  // REQUIRES IMPLEMENTATION
-}
-
-void Address::setLocation(string  location){
-
-  // REQUIRES IMPLEMENTATION
+	return location;
 }
 
 
-/*********************************
- * Mostrar Address
- ********************************/  
+// metodos SET
+void Address::setStreet(string street) {
+
+	this->street = street;
+}
+
+void Address::setDoorNumber(unsigned short doorNumber) {
+
+	this->doorNumber = doorNumber;
+}
+
+void Address::setFloor(string floor) {
+
+	this->floor = floor;
+}
+
+void Address::setPostalCode(string postalCode) {
+
+	this->postalCode = postalCode;
+}
+
+void Address::setLocation(string  location) {
+
+	this->location = location;
+}
+
+void Address::show()
+{
+	cout << street << '/' << doorNumber << '/' << floor << '/' << postalCode << '/' << location << endl;
+}
 
 // discplyes an address in a nice format
-ostream& operator<<(ostream& out, const Address & address){
+ostream& operator<<(ostream & out, const Address & address) {
 
-  // REQUIRES IMPLEMENTATION
+	// REQUIRES IMPLEMENTATION
 
 }
