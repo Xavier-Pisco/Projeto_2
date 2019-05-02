@@ -38,6 +38,6 @@ public:
 	void show();
 	void setVectorLocations();
 	void searchLocation(string location);
-	friend ostream& operator<<(ostream& out, const Address& address);
+	//friend ostream& operator<<(ostream& out, const Address& address);
 
 };

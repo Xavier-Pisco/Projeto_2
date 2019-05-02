@@ -40,5 +40,5 @@ class Packet{
 
   // other methods
 
-  friend ostream& operator<<(ostream& out, const Packet & packet);
+  //friend ostream& operator<<(ostream& out, const Packet & packet);
 };

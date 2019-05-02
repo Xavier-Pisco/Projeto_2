@@ -50,6 +50,6 @@ public:
 
 	// other methods */
 	void show() const;
-	friend ostream& operator<<(ostream& out, const Agency& agency);
+	//friend ostream& operator<<(ostream& out, const Agency& agency);
 
 };

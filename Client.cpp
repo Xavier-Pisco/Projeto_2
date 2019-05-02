@@ -73,8 +73,8 @@ unsigned Client::setTotalPurchased(unsigned totalPurchased){
   
   // outros metodos
 
-ostream& operator<<(ostream& out, const Client & client){
-
-  // REQUIRES IMPLEMENTATION 
-
-}
+//ostream& operator<<(ostream& out, const Client & client){
+//
+//  // REQUIRES IMPLEMENTATION 
+//
+//}

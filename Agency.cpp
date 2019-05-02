@@ -75,7 +75,7 @@ void Agency::setAddress(Address address){
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency){
-
-  // A IMPLEMENTATION REQUIRED 
-}
+//ostream& operator<<(ostream& out, const Agency & agency){
+//
+//  // A IMPLEMENTATION REQUIRED 
+//}
