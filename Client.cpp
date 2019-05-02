@@ -1,77 +1,105 @@
 #include "Client.h"
 
 Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address){
-  
-  // REQUIRES IMPLEMENTATION 
+	
+	this->name = name;
+	this->VATnumber = VATnumber;
+	this->familySize = familySize;
+	this->address = address;
+	totalPurchased = 0;
 }
 
 Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased){
   
-  // REQUIRES IMPLEMENTATION 
+	this->name = name;
+	this->VATnumber = VATnumber;
+	this->familySize = familySize;
+	this->address = address;
+	this->packets = packets;
+	this->totalPurchased = totalPurchased;
 }
+
 
   // GET methods
 
 string Client::getName() const{
   
-  // REQUIRES IMPLEMENTATION 
+	return name;
 }
   
 unsigned Client::getVATnumber() const{
   
-  // REQUIRES IMPLEMENTATION 
+	return VATnumber;
 }
 
 unsigned short Client::getFamilySize() const{
   
-  // REQUIRES IMPLEMENTATION 
+	return familySize;
 }
 
 Address Client::getAddress() const{
   
-  // REQUIRES IMPLEMENTATION 
+	return address;
 }
 
 vector<Packet> Client::getPacketList() const{
   
-  // REQUIRES IMPLEMENTATION 
+	return packets;
 }
 
 unsigned Client::getTotalPurchased() const{
   
-  // REQUIRES IMPLEMENTATION 
+	return totalPurchased;
 }
   
+
   // metodos SET
 	  
 void Client::setName(string nome){
   
-  // REQUIRES IMPLEMENTATION 
+	this->name = name;
 }
 
 void Client::setVATnumber(unsigned VATnumber){
   
-  // REQUIRES IMPLEMENTATION 
+	this->VATnumber = VATnumber;
 }
 
 void Client::setFamilySize(unsigned short familySize){
   
-  // REQUIRES IMPLEMENTATION 
+	this->familySize = familySize;
 }
+
 void Client::setAddress(Address address){
   
-  // REQUIRES IMPLEMENTATION 
+	this->address = address;
 }
+
 void Client::setPacketList(vector<Packet> & packets){
   
-  // REQUIRES IMPLEMENTATION 
+	this->packets = packets;
 }
+
 unsigned Client::setTotalPurchased(unsigned totalPurchased){
   
-  // REQUIRES IMPLEMENTATION 
+	this->totalPurchased = totalPurchased;
 }
   
+
   // outros metodos
+
+void Client::show() const
+{
+	cout << name << endl;
+	cout << VATnumber << endl;
+	cout << familySize << endl;
+	address.show();
+	for (int i = 0; i < packets.size() - 1; i++)
+		cout << packets[i].getId() << " ; ";
+	cout << packets[packets.size() - 1].getId() << endl;
+	cout << totalPurchased << endl;
+}
+
 
 //ostream& operator<<(ostream& out, const Client & client){
 //
