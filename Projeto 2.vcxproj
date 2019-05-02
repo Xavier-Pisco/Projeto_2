@@ -19,27 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Address.cpp" />
-    <ClCompile Include="Source\Agency.cpp" />
-    <ClCompile Include="Source\Client.cpp" />
-    <ClCompile Include="Source\Date.cpp" />
-    <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Menus.cpp" />
-    <ClCompile Include="Source\Packet.cpp" />
+    <ClCompile Include="Address.cpp" />
+    <ClCompile Include="Agency.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Date.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menus.cpp" />
+    <ClCompile Include="Packet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resources\agency.txt" />
-    <Text Include="Resources\clients.txt" />
-    <Text Include="Resources\packs.txt" />
+    <Text Include="agency.txt" />
+    <Text Include="clients.txt" />
+    <Text Include="packs.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Address.h" />
-    <ClInclude Include="Headers\Agency.h" />
-    <ClInclude Include="Headers\Client.h" />
-    <ClInclude Include="Headers\Date.h" />
-    <ClInclude Include="Headers\defs.h" />
-    <ClInclude Include="Headers\Menus.h" />
-    <ClInclude Include="Headers\Packet.h" />
+    <ClInclude Include="Address.h" />
+    <ClInclude Include="Agency.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="defs.h" />
+    <ClInclude Include="Menus.h" />
+    <ClInclude Include="Packet.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
