@@ -92,12 +92,28 @@ void Address::setPostalCode(string postalCode) {
 void Address::setLocation(string  location) {
 
 	this->location = location;
+	setVectorLocations();
 }
 
 void Address::show()
 {
 	cout << street << '/' << doorNumber << '/' << floor << '/' << postalCode << '/' << location << endl;
 }
+
+void Address::setVectorLocations()
+{
+	string s = location;
+	v_locations.push_back(s.substr(0, s.find_first_of('-')));
+	s.erase(0, s.find_first_of('-') + 1);
+	while (s.find_first_of(',') != s.npos)
+	{
+		v_locations.push_back(s.substr(0, s.find_first_of(',')));
+		s.erase(0, s.find_first_of(',') + 1);
+	}
+	v_locations.push_back(s);
+}
+
+
 
 // discplyes an address in a nice format
 ostream& operator<<(ostream & out, const Address & address) {

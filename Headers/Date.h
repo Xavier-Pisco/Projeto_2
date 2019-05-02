@@ -4,9 +4,6 @@
 #include <string>
 #include <vector>
 
-
-#include "defs.h"
-
 using namespace std;
 
 class Date {
