@@ -4,9 +4,6 @@
 #include <string>
 #include <vector>
 
-
-#include "defs.h"
-
 using namespace std;
 
 class Date {
@@ -38,6 +35,6 @@ public:
 	bool isNotEqualTo(const Date& date) const; //checks if 2 dates are not equal
 	bool isAfter(const Date& date) const; //checks if a date is after another
 	bool isBefore(const Date& date) const; //checks if a date is before another
-	friend ostream& operator<<(ostream& out, const Date& date);
+	//friend ostream& operator<<(ostream& out, const Date& date);
 
 };

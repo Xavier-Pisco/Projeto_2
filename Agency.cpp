@@ -1,7 +1,5 @@
 #include "Agency.h"
 
-////////////////////////////
-
 Agency::Agency(string fileName){
 
   //  IMPLEMENTATION REQUIRED 
@@ -76,7 +74,7 @@ void Agency::setAddress(Address address){
  ********************************/  
 
 // mostra o conteudo de uma agencia
-ostream& operator<<(ostream& out, const Agency & agency){
-
-  // A IMPLEMENTATION REQUIRED 
-}
+//ostream& operator<<(ostream& out, const Agency & agency){
+//
+//  // A IMPLEMENTATION REQUIRED 
+//}

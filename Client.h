@@ -43,6 +43,6 @@ class Client{
   unsigned setTotalPurchased(unsigned totalPurchased);
   
   // other methods
-
-  friend ostream& operator<<(ostream& out, const Client & client);
+  void show() const;
+  //friend ostream& operator<<(ostream& out, const Client & client);
 };

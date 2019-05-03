@@ -1,3 +1,4 @@
+#pragma warning(disable : 4996)
 #include "Date.h"
 #include <ctime>
 #include <string>
@@ -193,9 +194,9 @@ bool Date::isBefore(const Date & date) const
 };
 
 
-// disply a Date in a nice format
-ostream& operator<<(ostream & out, const Date & date) {
-
-	// REQUIRES IMPLEMENTATION
-
-}
+//// disply a Date in a nice format
+//ostream& operator<<(ostream & out, const Date & date) {
+//
+//	// REQUIRES IMPLEMENTATION
+//
+//}

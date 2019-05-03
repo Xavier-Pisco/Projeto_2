@@ -39,6 +39,6 @@ class Packet{
   void setMaxPersons(unsigned maxPersons);
 
   // other methods
-
-  friend ostream& operator<<(ostream& out, const Packet & packet);
+  void show() const;
+  //friend ostream& operator<<(ostream& out, const Packet & packet);
 };
