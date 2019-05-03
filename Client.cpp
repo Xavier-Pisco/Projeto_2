@@ -80,7 +80,7 @@ void Client::setPacketList(vector<Packet> & packets){
 	this->packets = packets;
 }
 
-unsigned Client::setTotalPurchased(unsigned totalPurchased){
+void Client::setTotalPurchased(unsigned totalPurchased){
   
 	this->totalPurchased = totalPurchased;
 }
@@ -98,6 +98,32 @@ void Client::show() const
 		cout << packets[i].getId() << " ; ";
 	cout << packets[packets.size() - 1].getId() << endl;
 	cout << totalPurchased << endl;
+}
+
+void Client::buyPacket(int packetId, vector<Packet> vpackets)
+{
+	Packet packet = packet.getPackFromId(packetId);
+	packets.push_back(packet);
+
+	for (unsigned i = 0; i < packets.size(); i++)
+	{
+		if (packets[i].getId == packetId)
+			cout << "Já comprou lugar neste pacote." << endl;
+	}
+
+	for (unsigned i = 0; i < vpackets.size(); i++)
+	{
+		if (packet.getId() == packetId)
+		{
+			if (packet.getReserved() != packet.getMaxPersons())
+				this->totalPurchased += this->familySize * packet.getPricePerPerson();
+			else
+				cout << "Pacote não tem mais lugares disponiveis." << endl;
+		}
+	}
+
+
+
 }
 
 

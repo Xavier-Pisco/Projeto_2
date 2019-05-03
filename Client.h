@@ -40,9 +40,11 @@ class Client{
   void setFamilySize(unsigned short familySize);
   void setAddress(Address address);
   void setPacketList(vector<Packet> & packets);
-  unsigned setTotalPurchased(unsigned totalPurchased);
+  void setTotalPurchased(unsigned totalPurchased);
   
   // other methods
   void show() const;
+  void buyPacket(int packetId, vector<Packet> vpackets);
+
   //friend ostream& operator<<(ostream& out, const Client & client);
 };
