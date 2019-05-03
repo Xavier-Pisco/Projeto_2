@@ -37,7 +37,7 @@ public:
 	// outros */
 	void show();
 	void setVectorLocations();
-	void searchLocation(string location);
+	bool searchLocation(string location);
 	//friend ostream& operator<<(ostream& out, const Address& address);
 
 };

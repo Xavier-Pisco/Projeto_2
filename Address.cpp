@@ -111,6 +111,30 @@ void Address::setVectorLocations()
 		s.erase(0, s.find_first_of(',') + 1);
 	}
 	v_locations.push_back(s);
+
+	for (unsigned i = 0; i < v_locations.size(); i++)
+	{
+		if (v_locations[i][0] == ' ')
+			v_locations[i].erase(0, v_locations[i].find_first_not_of(' '));
+
+		v_locations[i].erase(v_locations[i].find_last_not_of(' ') + 1, v_locations[i].npos);
+	}
+}
+
+
+bool Address::searchLocation(string location)
+{
+	if (location[0] == ' ')
+		location.erase(0, location.find_first_not_of(' '));
+
+	location.erase(location.find_last_not_of(' ') + 1, location.npos);
+
+	for (unsigned i = 0; i < v_locations.size(); i++)
+	{
+		if (v_locations[i] == location)
+			return true;
+	}
+	return false;
 }
 
 
