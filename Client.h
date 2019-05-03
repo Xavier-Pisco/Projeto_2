@@ -32,6 +32,9 @@ class Client{
   Address getAddress() const;
   vector<Packet> getPacketList() const;
   unsigned getTotalPurchased() const;
+  string getContent() const;
+  string getPacketsIds() const;
+
   
   // SET methods
   

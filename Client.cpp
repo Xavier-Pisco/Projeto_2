@@ -51,6 +51,25 @@ unsigned Client::getTotalPurchased() const{
   
 	return totalPurchased;
 }
+
+string Client::getPacketsIds() const
+{
+	string content;
+	for (int i = 0; i < packets.size() - 1; i++)
+		content += packets[i].getId() + " ; ";
+	content += packets[packets.size() - 1].getId();
+}
+
+string Client::getContent() const
+{
+	string content;
+	content += name + '\n';
+	content += to_string(VATnumber) + '\n';
+	content += to_string(familySize) + '\n';
+	content += address.getContent() + '\n';
+	content += getPacketsIds() + '\n';
+	content += to_string(totalPurchased) + '\n';
+}
   
 
   // metodos SET

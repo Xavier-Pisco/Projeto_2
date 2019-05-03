@@ -21,6 +21,7 @@ public:
 	unsigned short getDay() const;
 	unsigned short getMonth() const;
 	unsigned getYear() const;
+	string getContent() const;
 
 	// SET methods
 

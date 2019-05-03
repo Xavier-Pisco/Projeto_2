@@ -26,6 +26,7 @@ public:
 	string getFloor() const;
 	string getPostalCode() const;
 	string getLocation() const;
+	string getContent() const;
 
 	// metodos SET
 	void setStreet(string street);

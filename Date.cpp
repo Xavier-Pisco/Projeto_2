@@ -54,6 +54,11 @@ unsigned Date::getYear() const {
 
 }
 
+string Date::getContent() const
+{
+	return (to_string(day) + '/' + to_string(month) + '/' + to_string(year));
+}
+
 
 /*********************************
  * SET Methods

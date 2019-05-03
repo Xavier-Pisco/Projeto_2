@@ -67,6 +67,11 @@ string Address::getLocation() const {
 	return location;
 }
 
+string Address::getContent() const
+{
+	return (street + " / " + to_string(doorNumber) + " / " + floor + " / " + postalCode + " / " + location);
+}
+
 
 // metodos SET
 void Address::setStreet(string street) {
