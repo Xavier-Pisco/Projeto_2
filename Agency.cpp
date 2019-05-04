@@ -25,7 +25,7 @@ Agency::Agency(string fileName){
 		}
 		if (counter == 3)
 		{
-			/////////////////////////ADDRESS//////////////////////
+			address_agency = line_agency;
 		}
 		if (counter == 4)
 		{
@@ -107,7 +107,7 @@ void Agency::setAddress(Address address){
  * Mostrar Loja*/
   void Agency::show() const
   {
-	  cout << name << endl << VATnumber << endl << URL << endl << address << endl << clients_file_name << endl << packs_file_name << endl;
+	  cout << name << endl << VATnumber << endl << URL << endl << address_agency << endl << clients_file_name << endl << packs_file_name << endl;
   }
   
 
