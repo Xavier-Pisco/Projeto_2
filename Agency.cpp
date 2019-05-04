@@ -25,7 +25,7 @@ Agency::Agency(string fileName){
 		}
 		if (counter == 3)
 		{
-			address_agency = line_agency;
+			Address address(line_agency);
 		}
 		if (counter == 4)
 		{
@@ -70,6 +70,11 @@ vector<Packet> Agency::getPackets() const{
 	return packets;
 }
 
+string Agency::getContent() const
+{
+	return (name + '\n' + to_string(VATnumber) + '\n' + address.getContent() + '\n' + URL + '\n' + clients_file_name + '\n' + packs_file_name + '\n');
+}
+
   
   // SET Methods
 
@@ -87,17 +92,17 @@ void Agency::setAddress(Address address){
 
 	this->address = address;
 }
-  void Agency::setURL(string url){
+void Agency::setURL(string url){
 
 	  this->URL = url;
 
 }
-  void Agency::setClients(vector<Client> & clients){
+void Agency::setClients(vector<Client> & clients){
 
 	  this->clients = clients;
 
   }
-  void Agency::setPackets(vector<Packet> & packets){
+void Agency::setPackets(vector<Packet> & packets){
 
 	  this->packets = packets;
 
@@ -107,7 +112,9 @@ void Agency::setAddress(Address address){
  * Mostrar Loja*/
   void Agency::show() const
   {
-	  cout << name << endl << VATnumber << endl << URL << endl << address_agency << endl << clients_file_name << endl << packs_file_name << endl;
+	  cout << name << endl << VATnumber << endl << URL << endl;
+	  address.show();
+	  cout << clients_file_name << endl << packs_file_name << endl;
   }
   
 

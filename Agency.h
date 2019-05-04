@@ -17,7 +17,6 @@ private:
 	string name; // name of the  agency
 	unsigned int VATnumber; // VAT number of the agency
 	Address address; // address of the agency
-	string address_agency;
 	string URL; // URL of the agency Web site
 	vector<Client> clients; // vector to store the existing clients
 	vector<Packet> packets; // vector to store the existing packets
@@ -39,6 +38,7 @@ public:
 	string getURL() const;
 	vector<Client> getClients() const;
 	vector<Packet> getPackets() const;
+	string getContent() const;
 
 
 	// methods SET
