@@ -1,39 +1,73 @@
 #include "Agency.h"
+#include <fstream>
+#include <string>
+#include <iostream>
 
 Agency::Agency(string fileName){
 
-  //  IMPLEMENTATION REQUIRED 
+	int counter = 0;
+	string line_agency;
+	ifstream agency_file;
+	agency_file.open(fileName);
+	while (getline(agency_file, line_agency))
+	{
+		if (counter == 0)
+		{
+			name = line_agency;
+		}
+		if (counter == 1)
+		{
+			VATnumber = stoi(line_agency);
+		}
+		if (counter == 2)
+		{
+			URL = line_agency;
+		}
+		if (counter == 3)
+		{
+			/////////////////////////ADDRESS//////////////////////
+		}
+		if (counter == 4)
+		{
+			clients_file_name = line_agency;
+		}
+		if (counter == 5)
+		{
+			packs_file_name = line_agency;
+		}
+		counter++;
+	}
 }
 
   // metodos GET
 string Agency::getName() const{
 
-  //  IMPLEMENTATION REQUIRED 
+  return name;
 }
 
 unsigned Agency::getVATnumber() const{
 
-  //  IMPLEMENTATION REQUIRED 
+	return VATnumber;
 }
 
 Address Agency::getAddress() const{
 
-  //  IMPLEMENTATION REQUIRED 
+	return address;
 }
 
 string Agency::getURL() const{
 
-  //  IMPLEMENTATION REQUIRED 
+	return URL;
 }
 
 vector<Client> Agency::getClients() const{
 
-  //  IMPLEMENTATION REQUIRED 
+	return clients;
 }
 
 vector<Packet> Agency::getPackets() const{
 
-  //  IMPLEMENTATION REQUIRED 
+	return packets;
 }
 
   
@@ -41,37 +75,41 @@ vector<Packet> Agency::getPackets() const{
 
 void Agency::setName(string name){
 
-  //  IMPLEMENTATION REQUIRED 
+	this->name = name;
 }
 
 void Agency::setVATnumber(unsigned VATnumber){
 
-  //  IMPLEMENTATION REQUIRED 
+	this->VATnumber = VATnumber;
 }
 
 void Agency::setAddress(Address address){
 
-  //  IMPLEMENTATION REQUIRED 
+	this->address = address;
 }
   void Agency::setURL(string url){
 
-  //  IMPLEMENTATION REQUIRED 
+	  this->URL = url;
 
 }
   void Agency::setClients(vector<Client> & clients){
 
-  //  IMPLEMENTATION REQUIRED 
+	  this->clients = clients;
 
   }
   void Agency::setPackets(vector<Packet> & packets){
 
-  //  IMPLEMENTATION REQUIRED 
+	  this->packets = packets;
 
 }
 
 /*********************************
- * Mostrar Loja
- ********************************/  
+ * Mostrar Loja*/
+  void Agency::show() const
+  {
+	  cout << name << endl << VATnumber << endl << URL << endl << address << endl << clients_file_name << endl << packs_file_name << endl;
+  }
+  
 
 // mostra o conteudo de uma agencia
 //ostream& operator<<(ostream& out, const Agency & agency){
