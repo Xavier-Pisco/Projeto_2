@@ -18,6 +18,7 @@ class Packet{
   Date end;  // end date
   double pricePerPerson; // price per person
   unsigned maxPersons; // number of persons still available in the packet (updated whenever the packet is sold to a new client)
+  static int nextId;
   
  public:
   Packet(vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons);
@@ -29,6 +30,7 @@ class Packet{
   Date getEndDate() const;
   double getPricePerPerson() const;
   unsigned getMaxPersons() const;
+  string getContent() const;
 
   // SET methods
   void setId(unsigned id);  // to set negatve if "deprecated"
@@ -37,6 +39,7 @@ class Packet{
   void setEndDate(Date end);
   void setPricePerPerson(double pricePerPerson);
   void setMaxPersons(unsigned maxPersons);
+  void setMaxPersons(unsigned total, unsigned reserved);
 
   // other methods
   void show() const;

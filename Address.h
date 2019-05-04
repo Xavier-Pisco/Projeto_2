@@ -38,7 +38,6 @@ public:
 	// outros */
 	void show() const;
 	void setVectorLocations();
-	bool searchLocation(string location);
 	//friend ostream& operator<<(ostream& out, const Address& address);
 
 };
