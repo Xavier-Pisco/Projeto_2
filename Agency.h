@@ -21,7 +21,7 @@ private:
 	vector<Client> clients; // vector to store the existing clients
 	vector<Packet> packets; // vector to store the existing packets
 	string clients_file_name;
-	string packs_file_name;
+	string packets_file_name;
 
 	bool clientsInfoHasChanged; // flag that is set to "true" if at least one client has been changed/added/deleted
 	bool packetsInfoHasChanged; // flag that is set to "true" if at least one packet has been changed/added/deleted
@@ -39,6 +39,8 @@ public:
 	vector<Client> getClients() const;
 	vector<Packet> getPackets() const;
 	string getContent() const;
+	string getClientsFilename() const;
+	string getPacketsFilename() const;
 
 
 	// methods SET

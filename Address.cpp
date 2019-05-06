@@ -69,7 +69,7 @@ string Address::getLocation() const {
 
 string Address::getContent() const
 {
-	return (street + " / " + to_string(doorNumber) + " / " + floor + " / " + postalCode + " / " + location);
+	return (street + "/ " + to_string(doorNumber) + " /" + floor + "/" + postalCode + "/" + location);
 }
 
 
@@ -102,7 +102,7 @@ void Address::setLocation(string  location) {
 
 void Address::show() const
 {
-	cout << street << '/' << doorNumber << '/' << floor << '/' << postalCode << '/' << location << endl;
+	cout << street << "/ " << doorNumber << " /" << floor << '/' << postalCode << '/' << location << endl;
 }
 
 void Address::setVectorLocations()
@@ -126,21 +126,21 @@ void Address::setVectorLocations()
 	}
 }
 
-
-bool Address::searchLocation(string location)
-{
-	if (location[0] == ' ')
-		location.erase(0, location.find_first_not_of(' '));
-
-	location.erase(location.find_last_not_of(' ') + 1, location.npos);
-
-	for (unsigned i = 0; i < v_locations.size(); i++)
-	{
-		if (v_locations[i] == location)
-			return true;
-	}
-	return false;
-}
+//
+//bool Address::searchLocation(string location)
+//{
+//	if (location[0] == ' ')
+//		location.erase(0, location.find_first_not_of(' '));
+//
+//	location.erase(location.find_last_not_of(' ') + 1, location.npos);
+//
+//	for (unsigned i = 0; i < v_locations.size(); i++)
+//	{
+//		if (v_locations[i] == location)
+//			return true;
+//	}
+//	return false;
+//}
 
 
 

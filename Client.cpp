@@ -1,4 +1,8 @@
 #include "Client.h"
+#include "Packet.h"
+#include <sstream>
+
+	//Construtores
 
 Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address){
 	
@@ -17,6 +21,22 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
 	this->address = address;
 	this->packets = packets;
 	this->totalPurchased = totalPurchased;
+}
+
+Client::Client(stringstream ssClient)
+{
+	string input;
+	getline(ssClient, name);
+	getline(ssClient, input);
+	VATnumber = stoi(input);
+	getline(ssClient, input);
+	familySize = stoi(input);
+	getline(ssClient, input);
+	this->setAddress(input);
+	getline(ssClient, input);
+	this->setPacketList(input);
+	getline(ssClient, input);
+	totalPurchased = stoi(input);
 }
 
 
@@ -58,6 +78,7 @@ string Client::getPacketsIds() const
 	for (int i = 0; i < packets.size() - 1; i++)
 		content += packets[i].getId() + " ; ";
 	content += packets[packets.size() - 1].getId();
+	return content;
 }
 
 string Client::getContent() const
@@ -69,6 +90,7 @@ string Client::getContent() const
 	content += address.getContent() + '\n';
 	content += getPacketsIds() + '\n';
 	content += to_string(totalPurchased) + '\n';
+	return content;
 }
   
 
@@ -99,6 +121,16 @@ void Client::setPacketList(vector<Packet> & packets){
 	this->packets = packets;
 }
 
+void Client::setPacketList(string packets)
+{
+	while (packets.find_first_of(';') != packets.npos)
+	{
+		this->packets.push_back(getPacketFromId(stoi(packets.substr(0, packets.find_first_of(';') - 1))));
+		packets.erase(0, packets.find_first_of(';') + 2);
+	}
+	this->packets.push_back(getPacketFromId(stoi(packets.substr(0, packets.npos))));
+}
+
 void Client::setTotalPurchased(unsigned totalPurchased){
   
 	this->totalPurchased = totalPurchased;
@@ -121,12 +153,12 @@ void Client::show() const
 
 void Client::buyPacket(int packetId, vector<Packet> vpackets)
 {
-	Packet packet = packet.getPackFromId(packetId);
+	Packet packet = getPackFromId(packetId, vpackets);
 	packets.push_back(packet);
 
 	for (unsigned i = 0; i < packets.size(); i++)
 	{
-		if (packets[i].getId == packetId)
+		if (packets[i].getId() == packetId)
 			cout << "Já comprou lugar neste pacote." << endl;
 	}
 
@@ -149,9 +181,9 @@ void Client::buyPacket(int packetId, vector<Packet> vpackets)
 
 }
 
-
 //ostream& operator<<(ostream& out, const Client & client){
 //
 //  // REQUIRES IMPLEMENTATION 
 //
 //}
+

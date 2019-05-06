@@ -25,7 +25,7 @@ Agency::Agency(string fileName){
 		}
 		if (counter == 3)
 		{
-			Address address(line_agency);
+			this->setAddress(line_agency);
 		}
 		if (counter == 4)
 		{
@@ -73,6 +73,16 @@ vector<Packet> Agency::getPackets() const{
 string Agency::getContent() const
 {
 	return (name + '\n' + to_string(VATnumber) + '\n' + address.getContent() + '\n' + URL + '\n' + clients_file_name + '\n' + packs_file_name + '\n');
+}
+
+string Agency::getClientsFilename() const
+{
+	return clients_file_name;
+}
+
+string Agency::getPacketsFilename() const
+{
+	return packets_file_name;
 }
 
   

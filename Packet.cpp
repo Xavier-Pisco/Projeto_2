@@ -1,5 +1,7 @@
 #include "Packet.h"
 
+int Packet::nextId;
+
 Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, unsigned maxPessoas){
 
 	nextId += 1;
@@ -112,3 +114,21 @@ void Packet::show() const
 //
 //  // REQUIRES IMPLEMENTATION
 //}
+
+
+
+	//Funções de Packets mas não da classe
+
+Packet getPacketFromId(const unsigned packetId, vector<Packet> vPackets)
+{
+	for (unsigned i = 0; i < vPackets.size(); i++)
+	{
+		if (vPackets[i].getId() == packetId)
+		{
+			return vPackets[i];
+		}
+
+		else if (i == vPackets.size() - 1)
+			cout << "Pacote não encontrado." << endl;
+	}
+}
