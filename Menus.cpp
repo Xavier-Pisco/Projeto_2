@@ -8,7 +8,7 @@
 
 unsigned clientsMenu()
 {
-	int checker_clients, i;
+	int checker_clients, i = 0;
 	while (true)
 	{
 		cout << "1. Dados de todos os clientes" << endl;
@@ -19,7 +19,15 @@ unsigned clientsMenu()
 		cin >> checker_clients;
 		if (checker_clients == 1)
 		{
-			for (i = 0; i < 5; )
+			while (i < vclients.size())
+			{
+				vclients[i].show();
+				if (i < (vclients.size() - 1))
+				{
+					cout << "::::::::::" << endl;
+				}
+				i++;
+			}
 		}
 	}
 }
