@@ -18,11 +18,11 @@ Date::Date()
 
 Date::Date(string date) {
 
-	year = stoi(date.substr(0, 4));
-	date.erase(0, 5);
-	month = stoi(date.substr(0, 2));
-	date.erase(0, 3);
-	day = stoi(date.substr(0, 2));
+	year = stoi(date.substr(0, date.find_first_of('/')));
+	date.erase(0, date.find_first_of('/') + 1);
+	month = stoi(date.substr(0, date.find_first_of('/')));
+	date.erase(0, date.find_first_of('/') + 1);
+	day = stoi(date);
 }
 
 

@@ -22,6 +22,7 @@ class Packet{
   
  public:
   Packet(vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons);
+  Packet(string packet);
 
   // GET methods
   unsigned getId() const;
@@ -35,6 +36,7 @@ class Packet{
   // SET methods
   void setId(unsigned id);  // to set negatve if "deprecated"
   void setSites(vector<string> sites);
+  void setSites(string sites);
   void setBeginDate(Date begin);
   void setEndDate(Date end);
   void setPricePerPerson(double pricePerPerson);
