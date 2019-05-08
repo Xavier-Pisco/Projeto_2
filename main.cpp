@@ -47,6 +47,9 @@ void openClientsFile(string filename)
 			clientContent = "";
 		}
 	}
+	Client client(clientContent);
+	vclients.push_back(client);
+	clientContent = "";
 }
 
 int main(){
