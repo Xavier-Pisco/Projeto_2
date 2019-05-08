@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <sstream>
 
 
 #include "defs.h"
@@ -24,7 +23,7 @@ class Client{
  public:
   Client(string name, unsigned VATnumber, unsigned short familySize, Address address);  // for a new client
   Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased);  // client read from file
-  Client(stringstream ssClient);
+  Client(string client);
 
   // GET methods
   

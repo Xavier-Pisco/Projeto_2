@@ -1,6 +1,5 @@
 #include "Client.h"
-#include "Packet.h"
-#include <sstream>
+
 
 	//Construtores
 
@@ -23,20 +22,24 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
 	this->totalPurchased = totalPurchased;
 }
 
-Client::Client(stringstream ssClient)
+Client::Client(string client)
 {
-	string input;
-	getline(ssClient, name);
-	getline(ssClient, input);
-	VATnumber = stoi(input);
-	getline(ssClient, input);
-	familySize = stoi(input);
-	getline(ssClient, input);
-	this->setAddress(input);
-	getline(ssClient, input);
-	this->setPacketList(input);
-	getline(ssClient, input);
-	totalPurchased = stoi(input);
+	name = client.substr(0, client.find_first_of('\n'));
+	client.erase(0, client.find_first_of('\n') + 1);
+
+	VATnumber = stoi(client.substr(0, client.find_first_of('\n')));
+	client.erase(0, client.find_first_of('\n') + 1);
+
+	familySize = stoi(client.substr(0, client.find_first_of('\n')));
+	client.erase(0, client.find_first_of('\n') + 1);
+
+	setAddress(client.substr(0, client.find_first_of('\n')));
+	client.erase(0, client.find_first_of('\n') + 1);
+
+	setPacketList(client.substr(0, client.find_first_of('\n')));
+	client.erase(0, client.find_first_of('\n') + 1);
+
+	totalPurchased = stoi(client.substr(0, client.find_first_of('\n')));
 }
 
 
@@ -153,13 +156,13 @@ void Client::show() const
 
 void Client::buyPacket(int packetId, vector<Packet> vpackets)
 {
-	Packet packet = getPackFromId(packetId, vpackets);
+	Packet packet = getPacketFromId(packetId);
 	packets.push_back(packet);
 
 	for (unsigned i = 0; i < packets.size(); i++)
 	{
 		if (packets[i].getId() == packetId)
-			cout << "Já comprou lugar neste pacote." << endl;
+			cout << "Ja comprou lugar neste pacote." << endl;
 	}
 
 	for (unsigned i = 0; i < vpackets.size(); i++)
@@ -173,7 +176,7 @@ void Client::buyPacket(int packetId, vector<Packet> vpackets)
 				packet.setMaxPersons(packet.getMaxPersons() - 1);
 			}
 			else
-				cout << "Pacote não tem mais lugares disponiveis." << endl;
+				cout << "Pacote nao tem mais lugares disponiveis." << endl;
 		}
 	}
 

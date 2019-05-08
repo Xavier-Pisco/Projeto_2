@@ -118,17 +118,3 @@ void Packet::show() const
 
 
 	//Funções de Packets mas não da classe
-
-Packet getPacketFromId(const unsigned packetId, vector<Packet> vPackets)
-{
-	for (unsigned i = 0; i < vPackets.size(); i++)
-	{
-		if (vPackets[i].getId() == packetId)
-		{
-			return vPackets[i];
-		}
-
-		else if (i == vPackets.size() - 1)
-			cout << "Pacote não encontrado." << endl;
-	}
-}

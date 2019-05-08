@@ -46,4 +46,4 @@ class Packet{
   //friend ostream& operator<<(ostream& out, const Packet & packet);
 };
 
-Packet getPacketFromId(const unsigned packetId, vector<Packet> vPackets);
+Packet getPacketFromId(const unsigned packetId);
