@@ -13,6 +13,45 @@ Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, 
 	maxPersons = maxPessoas;
 }
 
+Packet::Packet(string packet)
+{
+	int maximo, vendido;
+	bool valido = true;
+
+	if (stoi(packet.substr(0, packet.find_first_of('\n'))) < 0)
+		valido = false;
+
+	id = abs(stoi(packet.substr(0, packet.find_first_of('\n'))));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	setSites(packet.substr(0, packet.find_first_of('\n')));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	setBeginDate(packet.substr(0, packet.find_first_of('\n')));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	setEndDate(packet.substr(0, packet.find_first_of('\n')));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	pricePerPerson = stoi(packet.substr(0, packet.find_first_of('\n')));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	maximo = stoi(packet.substr(0, packet.find_first_of('\n')));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	vendido = stoi(packet.substr(0, packet.find_first_of('\n')));
+	packet.erase(0, packet.find_first_of('\n') + 1);
+
+	maxPersons = maximo - vendido;
+
+	if (!valido)
+		maxPersons = 0;
+
+	nextId += 1;
+
+	
+}
+
   // metodos GET
 
 unsigned Packet::getId() const{
@@ -69,6 +108,19 @@ void Packet::setSites(vector<string> sites){
 	this->sites = sites;
 }
 
+void Packet::setSites(string sites)
+{
+	this->sites.push_back(sites.substr(0, sites.find_first_of('-') - 1));
+	sites.erase(0, sites.find_first_of('-') + 2);
+
+	while (sites.find_first_of(',') != sites.npos)
+	{
+		this->sites.push_back(sites.substr(0, sites.find_first_of('-') - 1));
+		sites.erase(0, sites.find_first_of('-') + 2);
+	}
+	this->sites.push_back(sites);
+}
+
 void Packet::setBeginDate(Date begin){
 
 	this->begin = begin;
@@ -97,7 +149,13 @@ void Packet::setMaxPersons(unsigned total, unsigned reserved)
 
 void Packet::show() const
 {
-	cout << id << endl << sites[0] << " - ";
+	if (maxPersons == 0)
+		cout << to_string(-int(id)) << endl;
+
+	else
+		cout << id << endl;
+		
+	cout << sites[0] << " - ";
 	for (int i = 1; i < sites.size() - 1; i++)
 		cout << sites[i] << ", ";
 	cout << sites[sites.size() - 1] << endl;

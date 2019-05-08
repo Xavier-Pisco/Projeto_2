@@ -52,6 +52,34 @@ void openClientsFile(string filename)
 	clientContent = "";
 }
 
+
+void openPacketsFile(string filename)
+{
+	string input, packetContent;
+	ifstream f;
+	f.open(filename);
+
+	getline(f, input);
+
+	while (getline(f, input))
+	{
+		if (input != "::::::::::")
+			packetContent += input + '\n';
+
+		else
+		{
+			Packet packet(packetContent);
+			vpackets.push_back(packet);
+			packetContent = "";
+		}
+	}
+	Packet packet(packetContent);
+	vpackets.push_back(packet);
+	packetContent = "";
+}
+
+
+
 int main(){
 	string AGENCY_FILE_NAME;
 	cout << "agency file: ";
@@ -59,6 +87,8 @@ int main(){
 	Agency agency(AGENCY_FILE_NAME);   // create the agency
 
 	openClientsFile(agency.getClientsFilename());
+
+	openPacketsFile(agency.getPacketsFilename());
 	
 	mainMenu(agency);
 
