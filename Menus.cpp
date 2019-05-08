@@ -8,7 +8,11 @@
 
 unsigned clientsMenu()
 {
-	int checker_clients, i = 0;
+	int checker_clients, i = 0, xxxx, yyy;
+	string street, floor, postalCode, location, name;
+	unsigned short doorNumber, familySize;
+	unsigned VATnumber;
+	bool isCorrect = false;
 	while (true)
 	{
 		cout << "1. Dados de todos os clientes" << endl;
@@ -28,6 +32,49 @@ unsigned clientsMenu()
 				}
 				i++;
 			}
+		}
+		else if (checker_clients == 2)
+		{
+			cout << "Nome: ";
+			getline(cin, name);
+			cout << "NIF: ";
+			cin >> VATnumber;
+			while (cin.fail())
+			{
+				cin >> VATnumber;
+			}
+			cout << "Numero de agregado familiar: ";
+			cin >> familySize;
+			while (cin.fail())
+			{
+				cin >> familySize;
+			}
+			cout << "Rua: ";
+			getline(cin, street);
+			while (cin.fail())
+			{
+				getline(cin, street);
+			}
+			cout << "Numero da porta: ";
+			cin >> doorNumber;
+			while (cin.fail())
+			{
+				cin >> doorNumber;
+			}
+			cout << "Andar: ";
+			cin >> floor;
+			cout << "Codigo postal(xxxx-yyy): ";
+			while (isCorrect == false)
+			{
+				getline(cin, postalCode);
+				if (postalCode.find('-') == npos)
+				{
+					isCorrect = false;
+					/////////////////////////////////////////////////////////
+				}
+
+			}
+
 		}
 	}
 }
