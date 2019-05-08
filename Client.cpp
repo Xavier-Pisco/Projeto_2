@@ -184,6 +184,8 @@ void Client::buyPacket(int packetId, vector<Packet> vpackets)
 
 }
 
+vector<Client> vclients;
+
 //ostream& operator<<(ostream& out, const Client & client){
 //
 //  // REQUIRES IMPLEMENTATION 

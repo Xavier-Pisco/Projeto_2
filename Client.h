@@ -53,3 +53,5 @@ class Client{
 
   //friend ostream& operator<<(ostream& out, const Client & client);
 };
+
+extern vector<Client> vclients;

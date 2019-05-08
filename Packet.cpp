@@ -107,6 +107,8 @@ void Packet::show() const
 	
 }
 
+vector<Packet> vpackets;
+
 
 
 // shows a packet content 

@@ -5,14 +5,12 @@
 #include <fstream>
 #include <iomanip>
 
+#include "defs.h"
 #include "Agency.h"
 #include "Menus.h"
 #include "Client.h"
 // #include "utils.h"
 using namespace std;
-
-vector<Client> vclients;
-vector<Packet> vpackets;
 
 Packet getPacketFromId(const unsigned packetId)
 {
