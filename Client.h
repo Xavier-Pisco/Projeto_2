@@ -17,12 +17,12 @@ class Client{
   unsigned VATnumber; // VAT number of client
   unsigned short familySize;  // number of family members
   Address address; // client's address
-  vector<Packet> packets; // vector to store client's packets bought
+  vector<int> packets; // vector to store client's packets bought
   unsigned  totalPurchased; // total value spent by the client
 
  public:
   Client(string name, unsigned VATnumber, unsigned short familySize, Address address);  // for a new client
-  Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased);  // client read from file
+  Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<int> packets, unsigned totalPurchased);  // client read from file
   Client(string client);
 
   // GET methods
@@ -31,7 +31,7 @@ class Client{
   unsigned getVATnumber() const;
   unsigned short getFamilySize() const;
   Address getAddress() const;
-  vector<Packet> getPacketList() const;
+  vector<int> getPacketList() const;
   unsigned getTotalPurchased() const;
   string getContent() const;
   string getPacketsIds() const;
@@ -43,13 +43,13 @@ class Client{
   void setVATnumber(unsigned VATnumber);
   void setFamilySize(unsigned short familySize);
   void setAddress(Address address);
-  void setPacketList(vector<Packet> & packets);
+  void setPacketList(vector<int> packets);
   void setPacketList(string packets);
   void setTotalPurchased(unsigned totalPurchased);
   
   // other methods
   void show() const;
-  void buyPacket(int packetId, vector<Packet> vpackets);
+  void buyPacket(int packetId, vector<int> vpackets);
 
   //friend ostream& operator<<(ostream& out, const Client & client);
 };

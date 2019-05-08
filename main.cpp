@@ -46,12 +46,7 @@ void openClientsFile(string filename)
 			vclients.push_back(client);
 			clientContent = "";
 		}
-
-
-
 	}
-
-
 }
 
 int main(){
@@ -59,6 +54,9 @@ int main(){
 	cout << "agency file: ";
 	cin >> AGENCY_FILE_NAME;
 	Agency agency(AGENCY_FILE_NAME);   // create the agency
+
+	openClientsFile(agency.getClientsFilename());
+	
 	mainMenu(agency);
 
 	

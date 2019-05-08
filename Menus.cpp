@@ -48,7 +48,7 @@ unsigned mainMenu(Agency agency){
 		}
 		else if (checker == 2)
 		{
-			//falta completar este menu
+			clientsMenu();
 		}
 		else if (checker == 3)
 		{

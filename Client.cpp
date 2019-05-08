@@ -12,7 +12,7 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
 	totalPurchased = 0;
 }
 
-Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<Packet> & packets, unsigned totalPurchased){
+Client::Client(string name, unsigned VATnumber, unsigned short familySize, Address address, vector<int> packets, unsigned totalPurchased){
   
 	this->name = name;
 	this->VATnumber = VATnumber;
@@ -65,7 +65,7 @@ Address Client::getAddress() const{
 	return address;
 }
 
-vector<Packet> Client::getPacketList() const{
+vector<int> Client::getPacketList() const{
   
 	return packets;
 }
@@ -79,8 +79,8 @@ string Client::getPacketsIds() const
 {
 	string content;
 	for (int i = 0; i < packets.size() - 1; i++)
-		content += packets[i].getId() + " ; ";
-	content += packets[packets.size() - 1].getId();
+		content += packets[i] + " ; ";
+	content += packets[packets.size() - 1];
 	return content;
 }
 
@@ -119,7 +119,7 @@ void Client::setAddress(Address address){
 	this->address = address;
 }
 
-void Client::setPacketList(vector<Packet> & packets){
+void Client::setPacketList(vector<int> packets){
   
 	this->packets = packets;
 }
@@ -128,10 +128,10 @@ void Client::setPacketList(string packets)
 {
 	while (packets.find_first_of(';') != packets.npos)
 	{
-		this->packets.push_back(getPacketFromId(stoi(packets.substr(0, packets.find_first_of(';') - 1))));
+		this->packets.push_back(stoi(packets.substr(0, packets.find_first_of(';') - 1)));
 		packets.erase(0, packets.find_first_of(';') + 2);
 	}
-	this->packets.push_back(getPacketFromId(stoi(packets.substr(0, packets.npos))));
+	this->packets.push_back(stoi(packets.substr(0, packets.npos)));
 }
 
 void Client::setTotalPurchased(unsigned totalPurchased){
@@ -149,30 +149,30 @@ void Client::show() const
 	cout << familySize << endl;
 	address.show();
 	for (int i = 0; i < packets.size() - 1; i++)
-		cout << packets[i].getId() << " ; ";
-	cout << packets[packets.size() - 1].getId() << endl;
+		cout << packets[i] << " ; ";
+	cout << packets[packets.size() - 1] << endl;
 	cout << totalPurchased << endl;
 }
 
-void Client::buyPacket(int packetId, vector<Packet> vpackets)
+void Client::buyPacket(int packetId, vector<int> vpackets)
 {
 	Packet packet = getPacketFromId(packetId);
-	packets.push_back(packet);
+	packets.push_back(packetId);
 
 	for (unsigned i = 0; i < packets.size(); i++)
 	{
-		if (packets[i].getId() == packetId)
+		if (packets[i] == packetId)
 			cout << "Ja comprou lugar neste pacote." << endl;
 	}
 
 	for (unsigned i = 0; i < vpackets.size(); i++)
 	{
-		if (packet.getId() == packetId)
+		if (vpackets[i] == packetId)
 		{
 			if (packet.getMaxPersons())
 			{
 				this->totalPurchased += this->familySize * packet.getPricePerPerson();
-				packets.push_back(packet);
+				packets.push_back(packetId);
 				packet.setMaxPersons(packet.getMaxPersons() - 1);
 			}
 			else
