@@ -3,12 +3,13 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
-
+#include <iomanip>
 
 #include "Agency.h"
 #include "Menus.h"
 #include "Client.h"
 // #include "utils.h"
+using namespace std;
 
 vector<Client> vclients;
 vector<Packet> vpacket;
@@ -36,9 +37,11 @@ vector<Packet> vpacket;
 //}
 
 int main(){
+	string AGENCY_FILE_NAME;
+	cin >> AGENCY_FILE_NAME;
 	Agency agency(AGENCY_FILE_NAME);   // create the agency
 
-	agency.show();
+	mainMenu(agency);
 
 	
 
