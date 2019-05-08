@@ -67,7 +67,7 @@ unsigned clientsMenu()
 			while (isCorrect == false)
 			{
 				getline(cin, postalCode);
-				if (postalCode.find('-') == npos)
+				if (postalCode.find('-') == postalCode.npos)
 				{
 					isCorrect = false;
 					/////////////////////////////////////////////////////////

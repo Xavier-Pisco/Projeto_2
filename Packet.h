@@ -45,6 +45,7 @@ class Packet{
 
   // other methods
   void show() const;
+  bool searchLocation(string location);
   //friend ostream& operator<<(ostream& out, const Packet & packet);
 };
 
