@@ -96,7 +96,7 @@ string Client::getContent() const
 
   // metodos SET
 	  
-void Client::setName(string nome){
+void Client::setName(string name){
   
 	this->name = name;
 }

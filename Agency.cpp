@@ -33,7 +33,7 @@ Agency::Agency(string fileName){
 		}
 		if (counter == 5)
 		{
-			packs_file_name = line_agency;
+			packets_file_name = line_agency;
 		}
 		counter++;
 	}
@@ -72,7 +72,7 @@ vector<Packet> Agency::getPackets() const{
 
 string Agency::getContent() const
 {
-	return (name + '\n' + to_string(VATnumber) + '\n' + address.getContent() + '\n' + URL + '\n' + clients_file_name + '\n' + packs_file_name + '\n');
+	return (name + '\n' + to_string(VATnumber) + '\n' + address.getContent() + '\n' + URL + '\n' + clients_file_name + '\n' + packets_file_name + '\n');
 }
 
 string Agency::getClientsFilename() const
@@ -124,7 +124,7 @@ void Agency::setPackets(vector<Packet> & packets){
   {
 	  cout << name << endl << VATnumber << endl << URL << endl;
 	  address.show();
-	  cout << clients_file_name << endl << packs_file_name << endl;
+	  cout << clients_file_name << endl << packets_file_name << endl;
   }
   
 
