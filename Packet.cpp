@@ -2,7 +2,7 @@
 
 int Packet::nextId;
 
-Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, unsigned maxPessoas){
+Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, unsigned seatsAvailable, unsigned seatsBought){
 
 	nextId += 1;
 	id = nextId;
@@ -10,7 +10,10 @@ Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, 
 	begin = inicio;
 	end = fim;
 	pricePerPerson = precoPessoa;
-	maxPersons = maxPessoas;
+	this->seatsAvailable = seatsAvailable;
+	this->seatsBought = seatsBought;
+	if (seatsAvailable == seatsBought)
+		packetAvailable = false;
 }
 
 Packet::Packet(string packet)
@@ -19,7 +22,7 @@ Packet::Packet(string packet)
 	bool valido = true;
 
 	if (stoi(packet.substr(0, packet.find_first_of('\n'))) < 0)
-		valido = false;
+		packetAvailable = false;
 
 	id = abs(stoi(packet.substr(0, packet.find_first_of('\n'))));
 	packet.erase(0, packet.find_first_of('\n') + 1);
@@ -36,16 +39,11 @@ Packet::Packet(string packet)
 	pricePerPerson = stoi(packet.substr(0, packet.find_first_of('\n')));
 	packet.erase(0, packet.find_first_of('\n') + 1);
 
-	maximo = stoi(packet.substr(0, packet.find_first_of('\n')));
+	seatsAvailable = stoi(packet.substr(0, packet.find_first_of('\n')));
 	packet.erase(0, packet.find_first_of('\n') + 1);
 
-	vendido = stoi(packet.substr(0, packet.find_first_of('\n')));
+	seatsBought = stoi(packet.substr(0, packet.find_first_of('\n')));
 	packet.erase(0, packet.find_first_of('\n') + 1);
-
-	maxPersons = maximo - vendido;
-
-	if (!valido)
-		maxPersons = 0;
 
 	nextId += 1;
 
@@ -79,20 +77,34 @@ double Packet::getPricePerPerson() const{
 	return pricePerPerson;
 }
 
-unsigned Packet::getMaxPersons() const{
+unsigned Packet::getSeatsAvailable() const
+{
+	return seatsAvailable;
+}
 
-	return maxPersons;
+unsigned Packet::getSeatsBought() const
+{
+	return seatsBought;
 }
 
 string Packet::getContent() const
 {
 	string content;
-	content += to_string(id) + '\n' + sites[0] + " - ";
+	if (packetAvailable)
+		content += to_string(id) + '\n';
+	else
+		content += to_string(-int(id)) + '\n';
+
+	content += sites[0] + " - ";
 	for (int i = 1; i < sites.size() - 1; i++)
 		content += sites[i] + ", ";
 	content += sites[sites.size() - 1] + '\n';
+
 	content += begin.getContent() + end.getContent();
 	content += to_string(pricePerPerson) + '\n';
+	content += to_string(seatsAvailable) + '\n';
+	content += to_string(seatsBought) + '\n';
+	
 	return content;
 }
 
@@ -136,20 +148,21 @@ void Packet::setPricePerPerson(double pricePerPerson){
 	this->pricePerPerson = pricePerPerson;
 }
 
-void Packet::setMaxPersons(unsigned maxPersons){
-
-	this->maxPersons = maxPersons;
-}
-
-void Packet::setMaxPersons(unsigned total, unsigned reserved)
+void Packet::setSeatsAvailable(unsigned seatsAvailable)
 {
-	maxPersons = total - reserved;
+	this->seatsAvailable = seatsAvailable;
 }
+
+void Packet::setSeatsBought(unsigned seatsBought)
+{
+	this->seatsBought = seatsBought;
+}
+
 
 
 void Packet::show() const
 {
-	if (maxPersons == 0)
+	if (!packetAvailable)
 		cout << to_string(-int(id)) << endl;
 
 	else
@@ -161,7 +174,7 @@ void Packet::show() const
 	cout << sites[sites.size() - 1] << endl;
 	begin.show();
 	end.show();
-	cout << pricePerPerson << endl << maxPersons << endl;
+	cout << pricePerPerson << endl << seatsAvailable << endl << seatsBought << endl;
 	
 }
 

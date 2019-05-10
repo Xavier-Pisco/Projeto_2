@@ -17,11 +17,13 @@ class Packet{
   Date begin;  // begin date
   Date end;  // end date
   double pricePerPerson; // price per person
-  unsigned maxPersons; // number of persons still available in the packet (updated whenever the packet is sold to a new client)
+  unsigned seatsAvailable; // number of maximum seats available
+  unsigned seatsBought; //number of seats already bought
+  bool packetAvailable;
   static int nextId;
   
  public:
-  Packet(vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned maxPersons);
+  Packet(vector<string> sites, Date begin, Date end, double pricePerPerson, unsigned seatsAvailable, unsigned seatsBought);
   Packet(string packet);
 
   // GET methods
@@ -30,7 +32,8 @@ class Packet{
   Date getBeginDate() const;
   Date getEndDate() const;
   double getPricePerPerson() const;
-  unsigned getMaxPersons() const;
+  unsigned getSeatsAvailable() const;
+  unsigned getSeatsBought() const;
   string getContent() const;
 
   // SET methods
@@ -40,8 +43,8 @@ class Packet{
   void setBeginDate(Date begin);
   void setEndDate(Date end);
   void setPricePerPerson(double pricePerPerson);
-  void setMaxPersons(unsigned maxPersons);
-  void setMaxPersons(unsigned total, unsigned reserved);
+  void setSeatsAvailable(unsigned seatsAvailable);
+  void setSeatsBought(unsigned seatsBought);
 
   // other methods
   void show() const;

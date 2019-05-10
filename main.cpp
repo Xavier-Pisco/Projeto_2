@@ -22,7 +22,21 @@ Packet getPacketFromId(const unsigned packetId)
 		}
 
 		else if (i == vpackets.size() - 1)
-			cout << "Pacote não encontrado." << endl;
+			cout << "Pacote nao encontrado." << endl;
+	}
+}
+
+Client getClientFromNIF(const unsigned clientNIF)
+{
+	for (unsigned i = 0; i < vclients.size(); i++)
+	{
+		if (vclients[i].getVATnumber() == clientNIF)
+		{
+			return vpackets[i];
+		}
+
+		else if (i == vclients.size() - 1)
+			cout << "Cliente nao encontrado." << endl;
 	}
 }
 
