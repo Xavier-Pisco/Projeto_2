@@ -84,9 +84,29 @@ unsigned clientsMenu()
 					isCorrect = false;
 					/////////////////////////////////////////////////////////
 				}
+				else
+					isCorrect = true;
 
 			}
 
+		}
+
+		else if (checker_clients == 4)
+		{
+			unsigned NIF;
+			cout << "NIF do cliente: ";
+			cin >> NIF;
+
+			for (unsigned i = 0; i < vclients.size(); i++)
+			{
+				if (vclients[i].getVATnumber() == NIF)
+				{
+					vclients.erase(i);
+					break;
+				}
+				else if (i == vclients.size() - 1)
+					cout << "Cliente nao encontrado." << endl;
+			}
 		}
 	}
 }
