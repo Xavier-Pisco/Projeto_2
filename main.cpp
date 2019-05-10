@@ -32,7 +32,7 @@ Client getClientFromNIF(const unsigned clientNIF)
 	{
 		if (vclients[i].getVATnumber() == clientNIF)
 		{
-			return vpackets[i];
+			return vclients[i];
 		}
 
 		else if (i == vclients.size() - 1)

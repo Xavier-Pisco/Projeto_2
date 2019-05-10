@@ -55,3 +55,5 @@ class Client{
 };
 
 extern vector<Client> vclients;
+
+Client getClientFromNIF(const unsigned clientNIF);

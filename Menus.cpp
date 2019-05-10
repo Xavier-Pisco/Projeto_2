@@ -16,9 +16,10 @@ unsigned clientsMenu()
 	while (true)
 	{
 		cout << "1. Dados de todos os clientes" << endl;
-		cout << "2. Adicionar clientes" << endl;
-		cout << "3. Remover clientes" << endl;
-		cout << "4. Alterar clientes" << endl;
+		cout << "2. Dados de um cliente" << endl;
+		cout << "3. Adicionar clientes" << endl;
+		cout << "4. Remover clientes" << endl;
+		cout << "5. Alterar clientes" << endl;
 		cout << "0. Voltar" << endl;
 		cin >> checker_clients;
 		if (checker_clients == 1)
@@ -33,7 +34,18 @@ unsigned clientsMenu()
 				i++;
 			}
 		}
+
 		else if (checker_clients == 2)
+		{
+			unsigned NIF;
+			cout << "NIF do cliente: ";
+			cin >> NIF;
+
+			getClientFromNIF(NIF).show();
+		}
+
+
+		else if (checker_clients == 3)
 		{
 			cout << "Nome: ";
 			getline(cin, name);
