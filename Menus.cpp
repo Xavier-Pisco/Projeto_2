@@ -5,14 +5,103 @@
 #include <fstream>
 #include <sstream>
 
-
-unsigned clientsMenu()
+void changeClient(int i)
 {
-	int checker_clients, i = 0, xxxx, yyy;
+	int menuChecker, NIF, familySize, doorNumber;
+	string name, street, postalCode, location, floor;
+
+	while (true)
+	{
+		cout << endl << "1. Alterar o nome" << endl;
+		cout << "2. Alterar o NIF" << endl;
+		cout << "3. Alterar o número de pessoas no agregado familiar" << endl;
+		cout << "4. Alterar a morada" << endl;
+		cout << "0. Voltar atrás" << endl;
+
+		cin >> menuChecker;
+
+		if (menuChecker == 1)
+		{
+			cout << "Nome do cliente: ";
+			getline(cin, name);
+			vclients[i].setName(name);
+		}
+
+		else if (menuChecker == 2)
+		{
+			cout << "NIF do cliente: ";
+			cin >> NIF;
+			while (cin.fail())
+			{
+				cout << "NIF invalido. Insira novamente: ";
+				cin >> NIF;
+			}
+
+			vclients[i].setVATnumber(NIF);
+		}
+
+		else if (menuChecker == 3)
+		{
+			cout << "Numero de pessoas no agragado familiar: ";
+			cin >> familySize;
+
+			while (cin.fail())
+			{
+				cout << "Numero invalido. Insira novamente: ";
+				cin >> familySize;
+			}
+
+			vclients[i].setFamilySize(familySize);
+		}
+
+		else if (menuChecker == 4)
+		{
+			cout << "Rua: ";
+			getline(cin, street);
+			while (cin.fail())
+			{
+				getline(cin, street);
+			}
+
+			cout << "Numero da porta: ";
+			cin >> doorNumber;
+			while (cin.fail())
+			{
+				cin >> doorNumber;
+			}
+
+			cout << "Andar: ";
+			cin >> floor;
+
+			cout << "Codigo postal(xxxx-yyy): ";
+			getline(cin, postalCode);
+			while (!postalCodeChecker(postalCode))
+			{
+				cout << "Codigo postal invalido. Insira novamente(xxxx-yyy): ";
+				getline(cin, postalCode);
+			}
+
+			cout << "Localidade: ";
+			getline(cin, location);
+
+			Address address(street, doorNumber, floor, postalCode, location);
+		}
+
+		else if (menuChecker == 0)
+			break;
+
+		else
+			cout << "Codigo invalido." << endl;
+	}
+}
+
+void clientsMenu()
+{
+	int checker_clients, i = 0;
 	string street, floor, postalCode, location, name;
 	unsigned short doorNumber, familySize;
 	unsigned VATnumber;
-	bool isCorrect = false;
+
 	while (true)
 	{
 		cout << "1. Dados de todos os clientes" << endl;
@@ -22,8 +111,10 @@ unsigned clientsMenu()
 		cout << "5. Alterar clientes" << endl;
 		cout << "0. Voltar" << endl;
 		cin >> checker_clients;
+		
 		if (checker_clients == 1)
 		{
+			i = 0;
 			while (i < vclients.size())
 			{
 				vclients[i].show();
@@ -49,45 +140,53 @@ unsigned clientsMenu()
 		{
 			cout << "Nome: ";
 			getline(cin, name);
+
 			cout << "NIF: ";
 			cin >> VATnumber;
 			while (cin.fail())
 			{
 				cin >> VATnumber;
 			}
+			
 			cout << "Numero de agregado familiar: ";
 			cin >> familySize;
 			while (cin.fail())
 			{
 				cin >> familySize;
 			}
+			
 			cout << "Rua: ";
 			getline(cin, street);
 			while (cin.fail())
 			{
 				getline(cin, street);
 			}
+			
 			cout << "Numero da porta: ";
 			cin >> doorNumber;
 			while (cin.fail())
 			{
 				cin >> doorNumber;
 			}
+			
 			cout << "Andar: ";
 			cin >> floor;
+			
 			cout << "Codigo postal(xxxx-yyy): ";
-			while (isCorrect == false)
+			getline(cin, postalCode);
+			while (!postalCodeChecker(postalCode))
 			{
+				cout << "Codigo postal invalido. Insira novamente(xxxx-yyy): ";
 				getline(cin, postalCode);
-				if (postalCode.find('-') == postalCode.npos)
-				{
-					isCorrect = false;
-					/////////////////////////////////////////////////////////
-				}
-				else
-					isCorrect = true;
-
 			}
+
+			cout << "Localidade: ";
+			getline(cin, location);
+
+			Address address(street, doorNumber, floor, postalCode, location);
+			Client client(name, VATnumber, familySize, address);
+
+			vclients.push_back(client);
 
 		}
 
@@ -101,17 +200,168 @@ unsigned clientsMenu()
 			{
 				if (vclients[i].getVATnumber() == NIF)
 				{
-					vclients.erase(i);
+					vclients.erase(vclients.begin() + i);
 					break;
 				}
 				else if (i == vclients.size() - 1)
 					cout << "Cliente nao encontrado." << endl;
 			}
 		}
+
+		else if (checker_clients == 5)
+		{
+			unsigned NIF;
+			cout << "NIF do cliente: ";
+			cin >> NIF;
+
+			for (unsigned i = 0; i < vclients.size(); i++)
+			{
+				if (vclients[i].getVATnumber() == NIF)
+				{
+					changeClient(i);
+					break;
+				}
+				else if (i == vclients.size() - 1)
+					cout << "Cliente nao encontrado." << endl;
+			}
+		}
+
+		else if (checker_clients == 0)
+			break;
+
+		else 
+		cout << "Codigo invalido." << endl;
+	}
+
+}
+
+void packetsMenu()
+{
+	int menuChecker;
+	vector<Packet> orderedPackets;
+
+	while (true)
+	{
+		cout << endl << "1. Ordenar por data" << endl;
+		cout << "2. Entre duas datas" << endl;
+		cout << "3. Procurar por local turistico" << endl;
+		cout << "4. Ver dados de 1 pacote" << endl;
+		cout << "0. Voltar atras" << endl;
+
+		cin >> menuChecker;
+
+		if (menuChecker == 1)
+		{
+			for (unsigned i = 0; i < vpackets.size(); i++)
+			{
+				if (orderedPackets.size() == 0)
+					orderedPackets.push_back(vpackets[i]);
+
+				else
+				{
+					for (unsigned x = 0; x < orderedPackets.size(); x++)
+					{
+						if (vpackets[i].getBeginDate().isBefore(orderedPackets[x].getBeginDate()))
+						{
+							orderedPackets.insert(orderedPackets.begin() + x, vpackets[i]);
+							break;
+						}
+
+						else if (x == orderedPackets.size() - 1)
+						{
+							orderedPackets.push_back(vpackets[i]);
+							break;
+						}
+					}
+				}
+			}
+
+			for (unsigned i = 0; i < orderedPackets.size(); i++)
+			{
+				orderedPackets[i].show();
+
+				if (i < orderedPackets.size() - 1)
+					cout << "::::::::::" << endl;
+			}
+		}
+
+		else if (menuChecker == 2)
+		{
+			string date;
+			cout << "Insira data inicial(AAAA/MM/DD): ";
+			cin >> date;
+			Date begin(date);
+
+			cout << "Insira data final(AAAA/MM/DD): ";
+			cin >> date;
+			Date end(date);
+
+			for (unsigned i = 0; i < vpackets.size(); i++)
+			{
+				if (vpackets[i].getBeginDate().isAfter(begin) && vpackets[i].getEndDate().isBefore(end))
+					vpackets[i].show();
+			}
+		}
+
+		else if (menuChecker == 3)
+		{
+			string location;
+			int counter = 0;
+
+			cin.ignore(1000, '\n');
+
+			cout << "Local turistico: ";
+			getline(cin, location);
+
+			for (unsigned i = 0; i < vpackets.size(); i++)
+			{
+				if (vpackets[i].searchLocation(location))
+				{
+					vpackets[i].show();
+					counter++;
+				}
+			}
+
+			if (counter == 0)
+				cout << "Nenhum pacote tem este local turistico." << endl;
+		}
+
+		else if (menuChecker == 4)
+		{
+			int packetId;
+
+			cout << "Id do pacote: ";
+			cin >> packetId;
+
+			while (cin.fail())
+			{
+				cout << "Id invalido. Insira novamente: ";
+				cin >> packetId;
+			}
+
+			for (unsigned i = 0; i < vpackets.size(); i++)
+			{
+				if (vpackets[i].getId() == packetId)
+				{
+					vpackets[i].show();	
+					break;
+				}
+
+				else if (i == vpackets.size() - 1)
+					cout << "Pacote nao encontrado." << endl;
+			}
+		}
+
+		else if (menuChecker == 0)
+		break;
+
+		else
+		cout << "Codigo nao aceite." << endl;
 	}
 }
 
-unsigned mainMenu(Agency agency){
+void mainMenu(Agency agency)
+{
 
 	int checker;
 	while (true)
@@ -131,14 +381,14 @@ unsigned mainMenu(Agency agency){
 		}
 		else if (checker == 3)
 		{
-			//falta completar este menu
+			packetsMenu();
 		}
 		else if (checker == 0)
 		{
 			break;
 		}
+		else
+			cout << "Codigo nao aceite." << endl;
 	}
-  
-  return 0;
 }
     

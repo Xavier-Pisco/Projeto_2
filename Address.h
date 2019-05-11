@@ -1,8 +1,10 @@
-;#pragma once
+#pragma once
 
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "defs.h"
 
 using namespace std;
 
@@ -13,7 +15,6 @@ private:
 	string floor; // floor number ("-" is not applicable)
 	string postalCode; // postal code
 	string location; // site
-	vector<string> v_locations; // vector com as localizações para comparar
 
 public:
 	Address();
@@ -37,7 +38,8 @@ public:
 
 	// outros */
 	void show() const;
-	void setVectorLocations();
 	//friend ostream& operator<<(ostream& out, const Address& address);
 
 };
+
+bool postalCodeChecker(string postalCode);

@@ -35,6 +35,7 @@ class Packet{
   unsigned getSeatsAvailable() const;
   unsigned getSeatsBought() const;
   string getContent() const;
+  bool getPacketAvailable() const;
 
   // SET methods
   void setId(unsigned id);  // to set negatve if "deprecated"

@@ -12,6 +12,27 @@
 // #include "utils.h"
 using namespace std;
 
+string trim(string str)
+{
+	if (str[0] == ' ')
+		str.erase(0, str.find_first_not_of(' '));
+
+	str.erase(str.find_last_not_of(' ') + 1, str.npos);
+
+	return str;
+}
+
+bool stringIsNumber(string str)
+{
+	for (int i = 0; i < (str.size() - 1); i++)
+	{
+		if ((int)str[i] > 9) {
+			return false;
+		}
+	}
+	return true;
+}
+
 Packet getPacketFromId(const unsigned packetId)
 {
 	for (unsigned i = 0; i < vpackets.size(); i++)

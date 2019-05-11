@@ -6,6 +6,10 @@
 #include "Client.h"
 #include "Packet.h"
 
-unsigned clientsMenu();
+void changeClient(int i);
 
-unsigned mainMenu(Agency agency);
+void clientsMenu();
+
+void packetsMenu();
+
+void mainMenu(Agency agency);

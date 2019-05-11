@@ -97,35 +97,12 @@ void Address::setPostalCode(string postalCode) {
 void Address::setLocation(string  location) {
 
 	this->location = location;
-	setVectorLocations();
 }
 
 void Address::show() const
 {
 	cout << street << "/ " << doorNumber << " /" << floor << '/' << postalCode << '/' << location << endl;
 }
-
-void Address::setVectorLocations()
-{
-	string s = location;
-	v_locations.push_back(s.substr(0, s.find_first_of('-')));
-	s.erase(0, s.find_first_of('-') + 1);
-	while (s.find_first_of(',') != s.npos)
-	{
-		v_locations.push_back(s.substr(0, s.find_first_of(',')));
-		s.erase(0, s.find_first_of(',') + 1);
-	}
-	v_locations.push_back(s);
-
-	for (unsigned i = 0; i < v_locations.size(); i++)
-	{
-		if (v_locations[i][0] == ' ')
-			v_locations[i].erase(0, v_locations[i].find_first_not_of(' '));
-
-		v_locations[i].erase(v_locations[i].find_last_not_of(' ') + 1, v_locations[i].npos);
-	}
-}
-
 
 
 
@@ -135,3 +112,16 @@ void Address::setVectorLocations()
 //	// REQUIRES IMPLEMENTATION
 //
 //}
+
+bool postalCodeChecker(string postalCode)
+{
+	if (postalCode.find_first_of('-') == postalCode.npos)
+		return false;
+
+	if (stringIsNumber(postalCode.substr(0, 4)))
+	{
+		if (stringIsNumber(postalCode.substr(6, 8)))
+			return true;
+	}
+	return false;
+}

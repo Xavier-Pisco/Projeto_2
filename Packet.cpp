@@ -4,6 +4,7 @@ int Packet::nextId;
 
 Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, unsigned seatsAvailable, unsigned seatsBought){
 
+	packetAvailable = true;
 	nextId += 1;
 	id = nextId;
 	this->sites = sites;
@@ -20,6 +21,7 @@ Packet::Packet(string packet)
 {
 	int maximo, vendido;
 	bool valido = true;
+	packetAvailable = true;
 
 	if (stoi(packet.substr(0, packet.find_first_of('\n'))) < 0)
 		packetAvailable = false;
@@ -108,6 +110,11 @@ string Packet::getContent() const
 	return content;
 }
 
+bool Packet::getPacketAvailable() const
+{
+	return packetAvailable;
+}
+
   // metodos SET
 
 void Packet::setId(unsigned id){
@@ -122,15 +129,15 @@ void Packet::setSites(vector<string> sites){
 
 void Packet::setSites(string sites)
 {
-	this->sites.push_back(sites.substr(0, sites.find_first_of('-') - 1));
-	sites.erase(0, sites.find_first_of('-') + 2);
+	this->sites.push_back(trim(sites.substr(0, sites.find_first_of('-') - 1)));
+	sites.erase(0, sites.find_first_of('-') + 1);
 
 	while (sites.find_first_of(',') != sites.npos)
 	{
-		this->sites.push_back(sites.substr(0, sites.find_first_of('-') - 1));
-		sites.erase(0, sites.find_first_of('-') + 2);
+		this->sites.push_back(trim(sites.substr(0, sites.find_first_of(','))));
+		sites.erase(0, sites.find_first_of(',') + 1);
 	}
-	this->sites.push_back(sites);
+	this->sites.push_back(trim(sites));
 }
 
 void Packet::setBeginDate(Date begin){
@@ -156,6 +163,9 @@ void Packet::setSeatsAvailable(unsigned seatsAvailable)
 void Packet::setSeatsBought(unsigned seatsBought)
 {
 	this->seatsBought = seatsBought;
+
+	if (seatsAvailable == seatsBought)
+		packetAvailable = false;
 }
 
 
@@ -207,3 +217,4 @@ vector<Packet> vpackets;
 
 
 	//Funções de Packets mas não da classe
+

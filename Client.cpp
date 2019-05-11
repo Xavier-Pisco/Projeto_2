@@ -169,11 +169,11 @@ void Client::buyPacket(int packetId, vector<int> vpackets)
 	{
 		if (vpackets[i] == packetId)
 		{
-			if (packet.getMaxPersons())
+			if (packet.getPacketAvailable())
 			{
-				this->totalPurchased += this->familySize * packet.getPricePerPerson();
+				this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
 				packets.push_back(packetId);
-				packet.setMaxPersons(packet.getMaxPersons() - 1);
+				packet.setSeatsBought(packet.getSeatsBought() + 1);
 			}
 			else
 				cout << "Pacote nao tem mais lugares disponiveis." << endl;
