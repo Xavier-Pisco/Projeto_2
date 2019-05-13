@@ -13,7 +13,7 @@ void changeClient(int i)
 
 	while (true)
 	{
-		cout << endl << "1. Alterar o nome" << endl;
+		cout << "1. Alterar o nome" << endl;
 		cout << "2. Alterar o NIF" << endl;
 		cout << "3. Alterar o número de pessoas no agregado familiar" << endl;
 		cout << "4. Alterar a morada" << endl;
@@ -34,8 +34,11 @@ void changeClient(int i)
 			{
 				cout << "NIF: ";
 				cin >> NIF;
-				while (cin.fail())
+				while (cin.fail() || NIF < 100000000 || NIF > 999999999)
 				{
+					cout << "Dados invalidos" << endl << "NIF: ";
+					cin.clear();
+					cin.ignore(1000000, '\n');
 					cin >> NIF;
 				}
 
@@ -108,7 +111,7 @@ void changeClient(int i)
 			break;
 
 		else
-			cout << "Codigo invalido." << endl;
+			cout << "Dados invalidos" << endl;
 	}
 }
 
