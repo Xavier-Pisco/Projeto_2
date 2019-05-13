@@ -40,7 +40,6 @@ class Packet{
   // SET methods
   void setId(unsigned id);  // to set negatve if "deprecated"
   void setSites(vector<string> sites);
-  void setSites(string sites);
   void setBeginDate(Date begin);
   void setEndDate(Date end);
   void setPricePerPerson(double pricePerPerson);
@@ -56,3 +55,5 @@ class Packet{
 extern vector<Packet> vpackets;
 
 Packet getPacketFromId(const unsigned packetId);
+
+vector<string> sitesFromString(string sites);

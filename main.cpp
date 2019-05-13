@@ -12,6 +12,22 @@
 // #include "utils.h"
 using namespace std;
 
+vector<string> sitesFromString(string sites)
+{
+	vector<string> vsites;
+	vsites.push_back(trim(sites.substr(0, sites.find_first_of('-') - 1)));
+	sites.erase(0, sites.find_first_of('-') + 1);
+
+	while (sites.find_first_of(',') != sites.npos)
+	{
+		vsites.push_back(trim(sites.substr(0, sites.find_first_of(','))));
+		sites.erase(0, sites.find_first_of(',') + 1);
+	}
+	vsites.push_back(trim(sites));
+
+	return vsites;
+}
+
 string trim(string str)
 {
 	if (str[0] == ' ')

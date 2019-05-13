@@ -321,6 +321,7 @@ void packetsMenu()
 		cout << "2. Entre duas datas" << endl;
 		cout << "3. Procurar por local turistico" << endl;
 		cout << "4. Ver dados de 1 pacote" << endl;
+		cout << "5. Adicionar um pacote" << endl;
 		cout << "0. Voltar atras" << endl;
 
 		cin >> menuChecker;
@@ -437,6 +438,38 @@ void packetsMenu()
 				else if (i == vpackets.size() - 1)
 					cout << "Pacote nao encontrado." << endl;
 			}
+		}
+
+		else if (menuChecker == 5)
+		{
+			string sites, sbegin, send;
+			unsigned pricePerPerson, seatsAvailable, seatsBought;
+
+			cout << "Locais de destino: ";
+			cin.ignore(1000, '\n');
+			getline(cin, sites);
+
+			cout << "Data de inicio (AAAA/MM/DD): ";
+			getline(cin, sbegin);
+			Date begin(sbegin);
+
+			cout << "Data de fim (AAAA/MM/DD): ";
+			getline(cin, send);
+			Date end(send);
+
+			cout << "Preco por pessoa: ";
+			cin >> pricePerPerson;
+
+			cout << "Numero de lugares total: ";
+			cin >> seatsAvailable;
+
+			cout << "Numero de lugares vendidos: ";
+			cin >> seatsBought;
+
+			vector<string> vsites = sitesFromString(sites);
+
+			Packet packet(vsites, begin, end, pricePerPerson, seatsAvailable, seatsBought);
+			vpackets.push_back(packet);
 		}
 
 		else if (menuChecker == 0)

@@ -29,7 +29,7 @@ Packet::Packet(string packet)
 	id = abs(stoi(packet.substr(0, packet.find_first_of('\n'))));
 	packet.erase(0, packet.find_first_of('\n') + 1);
 
-	setSites(packet.substr(0, packet.find_first_of('\n')));
+	sites = sitesFromString(packet.substr(0, packet.find_first_of('\n')));
 	packet.erase(0, packet.find_first_of('\n') + 1);
 
 	setBeginDate(packet.substr(0, packet.find_first_of('\n')));
@@ -125,19 +125,6 @@ void Packet::setId(unsigned id){
 void Packet::setSites(vector<string> sites){
 
 	this->sites = sites;
-}
-
-void Packet::setSites(string sites)
-{
-	this->sites.push_back(trim(sites.substr(0, sites.find_first_of('-') - 1)));
-	sites.erase(0, sites.find_first_of('-') + 1);
-
-	while (sites.find_first_of(',') != sites.npos)
-	{
-		this->sites.push_back(trim(sites.substr(0, sites.find_first_of(','))));
-		sites.erase(0, sites.find_first_of(',') + 1);
-	}
-	this->sites.push_back(trim(sites));
 }
 
 void Packet::setBeginDate(Date begin){
