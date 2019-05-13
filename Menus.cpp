@@ -9,6 +9,7 @@ void changeClient(int i)
 {
 	int menuChecker, NIF, familySize, doorNumber;
 	string name, street, postalCode, location, floor;
+	bool checkNIF = true;
 
 	while (true)
 	{
@@ -29,12 +30,28 @@ void changeClient(int i)
 
 		else if (menuChecker == 2)
 		{
-			cout << "NIF do cliente: ";
-			cin >> NIF;
-			while (cin.fail())
+			while (checkNIF)
 			{
-				cout << "NIF invalido. Insira novamente: ";
+				cout << "NIF: ";
 				cin >> NIF;
+				while (cin.fail())
+				{
+					cin >> NIF;
+				}
+
+				for (int i = 0; i < vclients.size(); i++)
+				{
+					if (vclients[i].getVATnumber() == NIF)
+					{
+						cout << "NIF ja existe. " << endl;
+						break;
+					}
+
+					else if (i == vclients.size() - 1)
+						checkNIF = false;
+				}
+
+
 			}
 
 			vclients[i].setVATnumber(NIF);
@@ -101,6 +118,7 @@ void clientsMenu()
 	string street, floor, postalCode, location, name;
 	unsigned short doorNumber, familySize;
 	unsigned VATnumber;
+	bool checkNIF = true;
 
 	while (true)
 	{
@@ -109,6 +127,7 @@ void clientsMenu()
 		cout << "3. Adicionar clientes" << endl;
 		cout << "4. Remover clientes" << endl;
 		cout << "5. Alterar clientes" << endl;
+		cout << "6. Comprar pacote" << endl;
 		cout << "0. Voltar" << endl;
 		cin >> checker_clients;
 		
@@ -139,14 +158,33 @@ void clientsMenu()
 		else if (checker_clients == 3)
 		{
 			cout << "Nome: ";
+			cin.ignore(1000, '\n');
 			getline(cin, name);
 
-			cout << "NIF: ";
-			cin >> VATnumber;
-			while (cin.fail())
+			while (checkNIF)
 			{
+				cout << "NIF: ";
 				cin >> VATnumber;
+				while (cin.fail())
+				{
+					cin >> VATnumber;
+				}
+
+				for (int i = 0; i < vclients.size(); i++)
+				{
+					if (vclients[i].getVATnumber() == VATnumber)
+					{
+						cout << "NIF ja existe. " << endl;
+						break;
+					}
+
+					else if (i == vclients.size() - 1)
+						checkNIF = false;
+				}
+
+
 			}
+
 			
 			cout << "Numero de agregado familiar: ";
 			cin >> familySize;
@@ -156,6 +194,7 @@ void clientsMenu()
 			}
 			
 			cout << "Rua: ";
+			cin.ignore(1000, '\n');
 			getline(cin, street);
 			while (cin.fail())
 			{
@@ -173,6 +212,7 @@ void clientsMenu()
 			cin >> floor;
 			
 			cout << "Codigo postal(xxxx-yyy): ";
+			cin.ignore(1000, '\n');
 			getline(cin, postalCode);
 			while (!postalCodeChecker(postalCode))
 			{
@@ -224,6 +264,39 @@ void clientsMenu()
 				else if (i == vclients.size() - 1)
 					cout << "Cliente nao encontrado." << endl;
 			}
+		}
+
+		else if (checker_clients == 6)
+		{
+			unsigned NIF;
+			cout << "NIF do cliente: ";
+			cin >> NIF;
+
+			while (cin.fail())
+			{
+				cin >> NIF;
+			}
+
+			for (unsigned i = 0; i < vclients.size(); i++)
+			{
+				if (vclients[i].getVATnumber() == NIF)
+				{
+
+					unsigned packet;
+					cout << "Numero do pacote: ";
+					cin >> packet;
+
+					while (cin.fail())
+					{
+						cin >> packet;
+					}
+
+					vclients[i].buyPacket(packet);
+				}
+				else if (i == vclients.size() - 1)
+					cout << "Cliente nao encontrado." << endl;
+			}
+
 		}
 
 		else if (checker_clients == 0)
@@ -287,6 +360,7 @@ void packetsMenu()
 
 		else if (menuChecker == 2)
 		{
+			vector<Packet> showPackets;
 			string date;
 			cout << "Insira data inicial(AAAA/MM/DD): ";
 			cin >> date;
@@ -299,7 +373,18 @@ void packetsMenu()
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
 				if (vpackets[i].getBeginDate().isAfter(begin) && vpackets[i].getEndDate().isBefore(end))
-					vpackets[i].show();
+					showPackets.push_back(vpackets[i]);
+			}
+
+			if (showPackets.size() == 0)
+				cout << "Nenhum pacote encontrado." << endl;
+
+			for (unsigned i = 0; i < showPackets.size(); i++)
+			{
+				showPackets[i].show();
+
+				if (i < showPackets.size() - 1)
+					cout << "::::::::::" << endl;
 			}
 		}
 

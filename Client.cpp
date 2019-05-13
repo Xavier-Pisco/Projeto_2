@@ -77,6 +77,9 @@ unsigned Client::getTotalPurchased() const{
 
 string Client::getPacketsIds() const
 {
+	if (packets.size() == 0)
+		return "\n";
+
 	string content;
 	for (int i = 0; i < packets.size() - 1; i++)
 		content += packets[i] + " ; ";
@@ -148,39 +151,57 @@ void Client::show() const
 	cout << VATnumber << endl;
 	cout << familySize << endl;
 	address.show();
-	for (int i = 0; i < packets.size() - 1; i++)
-		cout << packets[i] << " ; ";
-	cout << packets[packets.size() - 1] << endl;
+
+	if (packets.size() == 0)
+		cout << "\n";
+
+	else
+	{
+		for (int i = 0; i < packets.size() - 1; i++)
+			cout << packets[i] << " ; ";
+		cout << packets[packets.size() - 1] << endl;
+	}
 	cout << totalPurchased << endl;
 }
 
-void Client::buyPacket(int packetId, vector<int> vpackets)
+void Client::buyPacket(int packetId)
 {
 	Packet packet = getPacketFromId(packetId);
-	packets.push_back(packetId);
 
 	for (unsigned i = 0; i < packets.size(); i++)
 	{
 		if (packets[i] == packetId)
-			cout << "Ja comprou lugar neste pacote." << endl;
-	}
-
-	for (unsigned i = 0; i < vpackets.size(); i++)
-	{
-		if (vpackets[i] == packetId)
 		{
-			if (packet.getPacketAvailable())
+			cout << "Ja comprou lugar neste pacote." << endl;
+			break;
+		}
+
+		else if (i == packets.size() - 1)
+		{
+			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
-				this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
-				packets.push_back(packetId);
-				packet.setSeatsBought(packet.getSeatsBought() + 1);
+				if (vpackets[i].getId() == packetId)
+				{
+					if (packet.getPacketAvailable())
+					{
+						this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
+						this->packets.push_back(packetId);
+						packet.setSeatsBought(packet.getSeatsBought() + 1);
+						cout << "Compra efetuada." << endl;
+					}
+					else
+						cout << "Pacote nao tem mais lugares disponiveis." << endl;
+
+					break;
+
+				}
+
+				else if (i == vpackets.size() - 1)
+					cout << "Pacote nao encotrado." << endl;
 			}
-			else
-				cout << "Pacote nao tem mais lugares disponiveis." << endl;
+			break;
 		}
 	}
-
-
 
 }
 

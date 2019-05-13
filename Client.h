@@ -49,7 +49,7 @@ class Client{
   
   // other methods
   void show() const;
-  void buyPacket(int packetId, vector<int> vpackets);
+  void buyPacket(int packetId);
 
   //friend ostream& operator<<(ostream& out, const Client & client);
 };

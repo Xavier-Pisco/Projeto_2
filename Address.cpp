@@ -118,9 +118,9 @@ bool postalCodeChecker(string postalCode)
 	if (postalCode.find_first_of('-') == postalCode.npos)
 		return false;
 
-	if (stringIsNumber(postalCode.substr(0, 4)))
+	if (stoi(postalCode.substr(0,4)) > 999 && stoi(postalCode.substr(0, 4)) < 10000)
 	{
-		if (stringIsNumber(postalCode.substr(6, 8)))
+		if (stoi(postalCode.substr(5, 3)) > 99 && stoi(postalCode.substr(5, 3)) < 1000)
 			return true;
 	}
 	return false;

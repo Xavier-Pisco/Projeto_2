@@ -24,13 +24,16 @@ string trim(string str)
 
 bool stringIsNumber(string str)
 {
-	for (int i = 0; i < (str.size() - 1); i++)
+	int count = 0;
+	for (int i = 0; i <= str.size(); i++)
 	{
-		if ((int)str[i] > 9) {
-			return false;
-		}
+		if (isdigit(str[i]))
+			count += 1;
 	}
-	return true;
+	if (count == str.size())
+		return true;
+
+	return false;
 }
 
 Packet getPacketFromId(const unsigned packetId)
