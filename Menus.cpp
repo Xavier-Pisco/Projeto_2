@@ -167,6 +167,8 @@ void clientsMenu()
 				cin >> VATnumber;
 				while (cin.fail())
 				{
+					cout << "Dados invalidos" << endl;
+					cout << "NIF: ";
 					cin >> VATnumber;
 				}
 
@@ -473,7 +475,7 @@ void mainMenu(Agency agency)
 			break;
 		}
 		else
-			cout << "Codigo nao aceite." << endl;
+			cout << "Dados invalidos" << endl;
 	}
 }
     

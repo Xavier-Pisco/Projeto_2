@@ -87,6 +87,7 @@ void openClientsFile(string filename)
 	}
 	Client client(clientContent);
 	vclients.push_back(client);
+	f.close();
 	clientContent = "";
 }
 
@@ -120,7 +121,7 @@ void openPacketsFile(string filename)
 
 int main(){
 	string AGENCY_FILE_NAME;
-	cout << "agency file: ";
+	cout << "Agency file: ";
 	cin >> AGENCY_FILE_NAME;
 	Agency agency(AGENCY_FILE_NAME);   // create the agency
 
