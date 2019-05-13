@@ -165,10 +165,12 @@ void clientsMenu()
 			{
 				cout << "NIF: ";
 				cin >> VATnumber;
-				while (cin.fail() && (VATnumber < 100000000 || VATnumber > 999999999))
+				while (cin.fail() || (VATnumber < 100000000 || VATnumber > 999999999))
 				{
 					cout << "Dados invalidos" << endl;
 					cout << "NIF: ";
+					cin.clear();
+					cin.ignore(1000000000, '\n');
 					cin >> VATnumber;
 				}
 
@@ -190,8 +192,11 @@ void clientsMenu()
 			
 			cout << "Numero de agregado familiar: ";
 			cin >> familySize;
-			while (cin.fail())
+			while (cin.fail() || familySize < 0)
 			{
+				cout << "Dados invalidos" << endl << "Numero de agregado familiar: ";
+				cin.clear();
+				cin.ignore(10000000, '\n');
 				cin >> familySize;
 			}
 			
@@ -205,8 +210,11 @@ void clientsMenu()
 			
 			cout << "Numero da porta: ";
 			cin >> doorNumber;
-			while (cin.fail())
+			while (cin.fail() || doorNumber < 0)
 			{
+				cout << "Dados invalidos" << endl << "Numero da porta: ";
+				cin.clear();
+				cin.ignore(10000000, '\n');
 				cin >> doorNumber;
 			}
 			
@@ -214,11 +222,12 @@ void clientsMenu()
 			cin >> floor;
 			
 			cout << "Codigo postal(xxxx-yyy): ";
-			cin.ignore(1000, '\n');
+			cin.ignore(1000000, '\n');
 			getline(cin, postalCode);
 			while (!postalCodeChecker(postalCode))
 			{
-				cout << "Codigo postal invalido. Insira novamente(xxxx-yyy): ";
+				cout << "Dados invalidos" << endl << "Codigo postal(xxxx-yyy): ";
+				cin.clear();
 				getline(cin, postalCode);
 			}
 
@@ -237,16 +246,17 @@ void clientsMenu()
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
-
+			
 			for (unsigned i = 0; i < vclients.size(); i++)
 			{
 				if (vclients[i].getVATnumber() == NIF)
 				{
 					vclients.erase(vclients.begin() + i);
+					cout << "Cliente apagado" << endl;
 					break;
 				}
 				else if (i == vclients.size() - 1)
-					cout << "Cliente nao encontrado." << endl;
+					cout << "Dados invalidos" << endl;
 			}
 		}
 
