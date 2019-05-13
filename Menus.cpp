@@ -165,7 +165,7 @@ void clientsMenu()
 			{
 				cout << "NIF: ";
 				cin >> VATnumber;
-				while (cin.fail())
+				while (cin.fail() && (VATnumber < 100000000 || VATnumber > 999999999))
 				{
 					cout << "Dados invalidos" << endl;
 					cout << "NIF: ";
