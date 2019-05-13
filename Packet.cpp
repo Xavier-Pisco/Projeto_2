@@ -145,6 +145,9 @@ void Packet::setPricePerPerson(double pricePerPerson){
 void Packet::setSeatsAvailable(unsigned seatsAvailable)
 {
 	this->seatsAvailable = seatsAvailable;
+
+	if (seatsAvailable == seatsBought)
+		packetAvailable = false;
 }
 
 void Packet::setSeatsBought(unsigned seatsBought)

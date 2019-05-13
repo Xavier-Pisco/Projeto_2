@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <stdio.h>
 
 void changeClient(int i)
 {
@@ -310,6 +311,135 @@ void clientsMenu()
 
 }
 
+void changePacket(int i)
+{
+	int menuChecker, pricePerPerson, seatsAvailable, seatsBought;
+	string sites, sbegin, send;
+
+	while (true)
+	{
+		cout << "1. Alterar o destino" << endl;
+		cout << "2. Alterar a data de inicio" << endl;
+		cout << "3. Alterar a data de fim" << endl;
+		cout << "4. Alterar o preco por pessoa" << endl;
+		cout << "5. Alterar o numero de lugares total" << endl;
+		cout << "6. Alterar o numero de lugares vendidos" << endl;
+		cout << "0. Voltar atras" << endl;
+
+		cin >> menuChecker;
+
+		if (menuChecker == 1)
+		{
+			cout << "Ecreva o destino: ";
+			cin.ignore(1000, '\n');
+			getline(cin, sites);
+
+			vpackets[i].setSites(sitesFromString(sites));
+		}
+
+		else if (menuChecker == 2)
+		{
+			cout << "Escreva a data de inicio: ";
+			cin.ignore(1000, '\n');
+			getline(cin, sbegin);
+
+			Date begin(sbegin);
+
+			if (begin.isAfter(vpackets[i].getEndDate()))
+				cout << "Data inicial nao pode ser posterior a data final" << endl;
+
+			else
+			{
+				vpackets[i].setBeginDate(begin);
+			}
+		}
+
+		else if (menuChecker == 3)
+		{
+			cout << "Escreva a data de fim: ";
+			cin.ignore(1000, '\n');
+			getline(cin, send);
+
+			Date end(send);
+
+			if (end.isBefore(vpackets[i].getBeginDate()))
+				cout << "Data final nao pode anteceder a data inicial" << endl;
+
+			else
+			{
+				vpackets[i].setBeginDate(end);
+			}
+		}
+
+		else if (menuChecker == 4)
+		{
+			cout << "Escreva o preco por pessoa: ";
+			cin >> pricePerPerson;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << "Insira o preco por pessoa novamente: ";
+				cin.clear();
+				cin >> pricePerPerson;
+			}
+
+			vpackets[i].setPricePerPerson(pricePerPerson);
+		}
+
+		else if (menuChecker == 5)
+		{
+			cout << "Escreva o numero de lugares total: ";
+			cin >> seatsAvailable;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << endl << "Insira o numero de lugares total novamente: ";
+				cin.clear();
+				cin >> seatsAvailable;
+			}
+
+			while (seatsAvailable < vpackets[i].getSeatsBought())
+			{
+				cout << "Numeros de lugares total nao pode ser menor que o numero de lugares vendidos" << endl;
+				cout << "Insira o numero de lugares total novamente: ";
+				cin >> seatsAvailable;
+			}
+
+			vpackets[i].setSeatsAvailable(seatsAvailable);
+		}
+
+		else if (menuChecker == 6)
+		{
+			cout << "Escreva o numero de lugares vendidos: ";
+			cin >> seatsBought;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << "Insira o numero de lugares vendidos novamente: ";
+				cin.clear();
+				cin >> seatsBought;
+			}
+
+			while (seatsBought < vpackets[i].getSeatsAvailable())
+			{
+				cout << "Numeros de lugares vendido nao pode ser maior que o numero de lugares total" << endl;
+				cout << "Insira o numero de lugares vendido novamente: ";
+				cin >> seatsBought;
+			}
+
+			vpackets[i].setSeatsBought(seatsBought);
+		}
+
+		else if (menuChecker == 0)
+			break;
+
+		else
+			cout << "Dados invalidos";
+
+	}
+
+}
+
 void packetsMenu()
 {
 	int menuChecker;
@@ -322,6 +452,8 @@ void packetsMenu()
 		cout << "3. Procurar por local turistico" << endl;
 		cout << "4. Ver dados de 1 pacote" << endl;
 		cout << "5. Adicionar um pacote" << endl;
+		cout << "6. Remover um pacote" << endl;
+		cout << "7. Alterar um pacote" << endl;
 		cout << "0. Voltar atras" << endl;
 
 		cin >> menuChecker;
@@ -457,6 +589,14 @@ void packetsMenu()
 			getline(cin, send);
 			Date end(send);
 
+			while (end.isBefore(begin))
+			{
+				cout << "Data final nao pode anteceder a data inicial" << endl;
+				cout << "Data de fim (AAAA/MM/DD): ";
+				getline(cin, send);
+				Date end(send);
+			}
+
 			cout << "Preco por pessoa: ";
 			cin >> pricePerPerson;
 
@@ -466,10 +606,53 @@ void packetsMenu()
 			cout << "Numero de lugares vendidos: ";
 			cin >> seatsBought;
 
+			while (seatsAvailable < seatsBought)
+			{
+				cout << "Numero de lugares vendidos nao pode ser menor que o numero de lugares total" << endl;
+				cout << "Numero de lugares vendidos: ";
+				cin >> seatsBought;
+			}
+
 			vector<string> vsites = sitesFromString(sites);
 
 			Packet packet(vsites, begin, end, pricePerPerson, seatsAvailable, seatsBought);
 			vpackets.push_back(packet);
+		}
+
+		else if (menuChecker == 6)
+		{
+			unsigned Id;
+			cout << "Id do pacote: ";
+			cin >> Id;
+
+			for (unsigned i = 0; i < vpackets.size(); i++)
+			{
+				if (vpackets[i].getId() == Id)
+				{
+					vpackets.erase(vpackets.begin() + i);
+					break;
+				}
+				else if (i == vpackets.size() - 1)
+					cout << "Pacote nao encontrado." << endl;
+			}
+		}
+
+		else if (menuChecker == 7)
+		{
+			unsigned Id;
+			cout << "Id do pacote: ";
+			cin >> Id;
+
+			for (unsigned i = 0; i < vpackets.size(); i++)
+			{
+				if (vpackets[i].getId() == Id)
+				{
+					changePacket(i);
+					break;
+				}
+				else if (i == vpackets.size() - 1)
+					cout << "Pacote nao encontrado." << endl;
+			}
 		}
 
 		else if (menuChecker == 0)
