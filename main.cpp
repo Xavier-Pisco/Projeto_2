@@ -125,7 +125,7 @@ Packet getPacketFromId(const unsigned packetId)
 		}
 
 		else if (i == vpackets.size() - 1)
-			cout << "Pacote nao encontrado." << endl;
+			cout << "Pacote nao encontrado" << endl;
 	}
 }
 
