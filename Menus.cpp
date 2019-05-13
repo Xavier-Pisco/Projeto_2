@@ -43,15 +43,15 @@ void changeClient(int i)
 					cin >> NIF;
 				}
 
-				for (int i = 0; i < vclients.size(); i++)
+				for (int x = 0; x < vclients.size(); x++)
 				{
-					if (vclients[i].getVATnumber() == NIF)
+					if (vclients[x].getVATnumber() == NIF)
 					{
-						cout << "NIF ja existe. " << endl;
+						cout << "NIF ja existente " << endl;
 						break;
 					}
 
-					else if (i == vclients.size() - 1)
+					else if (x == vclients.size() - 1)
 						checkNIF = false;
 				}
 
@@ -63,12 +63,14 @@ void changeClient(int i)
 
 		else if (menuChecker == 3)
 		{
-			cout << "Numero de pessoas no agragado familiar: ";
+			cout << "Numero de pessoas no agregado familiar: ";
 			cin >> familySize;
 
 			while (cin.fail())
 			{
-				cout << "Numero invalido. Insira novamente: ";
+				cout << "Dados invalidos" << endl << "Numero de pessoas no agregado familiar: ";
+				cin.clear();
+				cin.ignore(100000000, '\n');
 				cin >> familySize;
 			}
 
@@ -88,6 +90,9 @@ void changeClient(int i)
 			cin >> doorNumber;
 			while (cin.fail())
 			{
+				cout << "Dados invalidos" << endl << "Numero da porta: ";
+				cin.clear();
+				cin.ignore(10000000, '\n');
 				cin >> doorNumber;
 			}
 
@@ -98,7 +103,7 @@ void changeClient(int i)
 			getline(cin, postalCode);
 			while (!postalCodeChecker(postalCode))
 			{
-				cout << "Codigo postal invalido. Insira novamente(xxxx-yyy): ";
+				cout << "Dados invalidos" << endl << "Codigo postal(xxxx-yyy): ";
 				getline(cin, postalCode);
 			}
 
@@ -290,6 +295,7 @@ void clientsMenu()
 
 			while (cin.fail())
 			{
+				cout << "Dados invalidos" << endl << "NIF do cliente: ";
 				cin >> NIF;
 			}
 
@@ -319,7 +325,7 @@ void clientsMenu()
 			break;
 
 		else 
-		cout << "Codigo invalido." << endl;
+		cout << "Dados invalidos" << endl;
 	}
 
 }
@@ -460,10 +466,10 @@ void packetsMenu()
 
 	while (true)
 	{
-		cout << endl << "1. Ordenar por data" << endl;
+		cout << "1. Ordenar por data" << endl;
 		cout << "2. Entre duas datas" << endl;
 		cout << "3. Procurar por local turistico" << endl;
-		cout << "4. Ver dados de 1 pacote" << endl;
+		cout << "4. Ver dados de um pacote" << endl;
 		cout << "5. Adicionar um pacote" << endl;
 		cout << "6. Remover um pacote" << endl;
 		cout << "7. Alterar um pacote" << endl;

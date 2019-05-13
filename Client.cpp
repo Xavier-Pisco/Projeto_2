@@ -172,7 +172,7 @@ void Client::buyPacket(int packetId)
 	{
 		if (packets[i] == packetId)
 		{
-			cout << "Ja comprou lugar neste pacote." << endl;
+			cout << "Ja comprou lugar neste pacote" << endl;
 			break;
 		}
 
