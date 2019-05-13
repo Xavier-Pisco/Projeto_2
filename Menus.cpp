@@ -139,6 +139,7 @@ void clientsMenu()
 		cout << "4. Remover clientes" << endl;
 		cout << "5. Alterar clientes" << endl;
 		cout << "6. Comprar pacote" << endl;
+		cout << "7. Ver locais recomendados para um cliente" << endl;
 		cout << "0. Voltar" << endl;
 		cin >> checker_clients;
 		
@@ -257,6 +258,13 @@ void clientsMenu()
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos \n NIF do cliente: ";
+				cin.clear();
+				cin >> NIF;
+			}
 			
 			for (unsigned i = 0; i < vclients.size(); i++)
 			{
@@ -322,6 +330,89 @@ void clientsMenu()
 					cout << "Cliente nao encontrado" << endl;
 			}
 
+		}
+
+		else if (checker_clients == 7)
+		{
+			unsigned NIF;
+			cout << "NIF do cliente: ";
+			cin >> NIF;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos \n NIF do cliente: ";
+				cin.clear();
+				cin >> NIF;
+			}
+
+			unsigned numero;
+			cout << "Numero máximo de destinos diferentes: ";
+			cin >> numero;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos \n Numero máximo de destinos diferentes: ";
+				cin.clear();
+				cin >> numero;
+			}
+
+			vector<int> packets = getClientFromNIF(NIF).getPacketList();
+
+			map<string, unsigned> mostVisited = mapMostVisited();
+
+			auto cmp = [](const auto & p1, const auto & p2)
+			{
+				return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
+			};
+
+			set < pair<string, unsigned>, decltype(cmp)> s(mostVisited.begin(), mostVisited.end(), cmp);
+
+			for (int i = 0; i < packets.size(); i++)
+			{
+				if (checkIfPacketExist(packets[i]))
+				{
+					Packet packet = getPacketFromId(packets[i]);
+
+					for (int x = 0; x < packet.getSites().size(); x++)
+					{
+						for (const auto& p : s)
+						{
+							if (packet.getSites()[x] == p.first)
+							{
+								s.erase(p);
+								break;
+							}
+						}
+					}
+				}
+			}
+			int count = 0;
+
+			for (const auto& p : s)
+			{
+				if (count < numero)
+				{
+					for (int i = 0; i < vpackets.size(); i++)
+					{
+						for (int x = 0; x < vpackets[i].getSites().size(); x++)
+						{
+							if (vpackets[i].getSites()[x] == p.first)
+							{
+								if (p.second > 1)
+								{
+									cout << p.first << " tem " << p.second << " clientes que ja visitaram e esta disponivel no pacote " << vpackets[i].getId() << endl;
+									count += 1;
+								}
+								else
+								{
+									cout << p.first << " tem " << p.second << " cliente que ja visitou e esta disponivel no pacote " << vpackets[i].getId() << endl;
+									count += 1;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		else if (checker_clients == 0)
