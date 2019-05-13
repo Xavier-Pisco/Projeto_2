@@ -9,6 +9,8 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
 	this->VATnumber = VATnumber;
 	this->familySize = familySize;
 	this->address = address;
+	vector<int> packets(0);
+	setPacketList(packets);
 	totalPurchased = 0;
 }
 
@@ -168,41 +170,67 @@ void Client::buyPacket(int packetId)
 {
 	Packet packet = getPacketFromId(packetId);
 
-	for (unsigned i = 0; i < packets.size(); i++)
+	if (packets.size() == 0)
 	{
-		if (packets[i] == packetId)
+		for (unsigned i = 0; i < vpackets.size(); i++)
 		{
-			cout << "Ja comprou lugar neste pacote." << endl;
-			break;
-		}
-
-		else if (i == packets.size() - 1)
-		{
-			for (unsigned i = 0; i < vpackets.size(); i++)
+			if (vpackets[i].getId() == packetId)
 			{
-				if (vpackets[i].getId() == packetId)
+				if (packet.getPacketAvailable())
 				{
-					if (packet.getPacketAvailable())
-					{
-						this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
-						this->packets.push_back(packetId);
-						packet.setSeatsBought(packet.getSeatsBought() + 1);
-						cout << "Compra efetuada." << endl;
-					}
-					else
-						cout << "Pacote nao tem mais lugares disponiveis." << endl;
-
-					break;
-
+					this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
+					this->packets.push_back(packetId);
+					packet.setSeatsBought(packet.getSeatsBought() + 1);
+					cout << "Compra efetuada." << endl;
 				}
+				else
+					cout << "Pacote nao tem mais lugares disponiveis." << endl;
 
-				else if (i == vpackets.size() - 1)
-					cout << "Pacote nao encotrado." << endl;
+				break;
+
 			}
-			break;
+
+			else if (i == vpackets.size() - 1)
+				cout << "Pacote nao encotrado." << endl;
 		}
 	}
+	else
+	{
+		for (unsigned i = 0; i < packets.size(); i++)
+		{
+			if (packets[i] == packetId)
+			{
+				cout << "Ja comprou lugar neste pacote." << endl;
+				break;
+			}
 
+			else if (i == packets.size() - 1)
+			{
+				for (unsigned i = 0; i < vpackets.size(); i++)
+				{
+					if (vpackets[i].getId() == packetId)
+					{
+						if (packet.getPacketAvailable())
+						{
+							this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
+							this->packets.push_back(packetId);
+							packet.setSeatsBought(packet.getSeatsBought() + 1);
+							cout << "Compra efetuada." << endl;
+						}
+						else
+							cout << "Pacote nao tem mais lugares disponiveis." << endl;
+
+						break;
+
+					}
+
+					else if (i == vpackets.size() - 1)
+						cout << "Pacote nao encotrado." << endl;
+				}
+				break;
+			}
+		}
+	}
 }
 
 vector<Client> vclients;

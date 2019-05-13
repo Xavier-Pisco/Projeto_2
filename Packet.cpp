@@ -167,11 +167,18 @@ void Packet::show() const
 
 	else
 		cout << id << endl;
-		
-	cout << sites[0] << " - ";
-	for (int i = 1; i < sites.size() - 1; i++)
-		cout << sites[i] << ", ";
-	cout << sites[sites.size() - 1] << endl;
+
+	if (sites.size() != 0)
+	{
+
+		cout << sites[0] << " - ";
+		for (int i = 1; i < sites.size() - 1; i++)
+			cout << sites[i] << ", ";
+		cout << sites[sites.size() - 1] << endl;
+	}
+
+	else if (sites.size() == 0)
+		cout << sites[0] << endl;
 	begin.show();
 	end.show();
 	cout << pricePerPerson << endl << seatsAvailable << endl << seatsBought << endl;

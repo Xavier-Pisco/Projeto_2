@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <iomanip>
+#include <map>
 
 #include "defs.h"
 #include "Agency.h"
@@ -12,19 +13,81 @@
 // #include "utils.h"
 using namespace std;
 
+
+bool checkIfPacketExist(const unsigned packetId)
+{
+	for (unsigned i = 0; i < vpackets.size(); i++)
+	{
+		if (vpackets[i].getId() == packetId)
+		{
+			return true;
+		}
+
+		else if (i == vpackets.size() - 1)
+			return false;
+	}
+}
+
+map<string, unsigned> mapMostVisited()
+{	
+	map<string, unsigned> mostVisited;
+
+	for (int i = 0; i < vclients.size(); i++)
+	{
+		for (int x = 0; x < vclients[i].getPacketList().size(); x++)
+		{
+			if (checkIfPacketExist(vclients[i].getPacketList()[x]))
+			{
+				Packet packet = getPacketFromId(vclients[i].getPacketList()[x]);
+
+				for (int a = 0; a < packet.getSites().size(); a++)
+				{
+					mostVisited[packet.getSites()[a]] = 0;
+				}
+			}
+
+		}
+	}
+
+	for (int i = 0; i < vclients.size(); i++)
+	{
+		for (int x = 0; x < vclients[i].getPacketList().size(); x++)
+		{
+			if (checkIfPacketExist(vclients[i].getPacketList()[x]))
+			{
+				Packet packet = getPacketFromId(vclients[i].getPacketList()[x]);
+
+				for (int a = 0; a < packet.getSites().size(); a++)
+				{
+					mostVisited[packet.getSites()[a]] += 1;
+				}
+			}
+		}
+	}
+
+	return mostVisited;
+}
+
+
 vector<string> sitesFromString(string sites)
 {
 	vector<string> vsites;
-	vsites.push_back(trim(sites.substr(0, sites.find_first_of('-') - 1)));
-	sites.erase(0, sites.find_first_of('-') + 1);
 
-	while (sites.find_first_of(',') != sites.npos)
+	if (sites.find_first_of('-') == sites.npos)
+		vsites.push_back(trim(sites));
+
+	else
 	{
-		vsites.push_back(trim(sites.substr(0, sites.find_first_of(','))));
-		sites.erase(0, sites.find_first_of(',') + 1);
-	}
-	vsites.push_back(trim(sites));
+		vsites.push_back(trim(sites.substr(0, sites.find_first_of('-') - 1)));
+		sites.erase(0, sites.find_first_of('-') + 1);
 
+		while (sites.find_first_of(',') != sites.npos)
+		{
+			vsites.push_back(trim(sites.substr(0, sites.find_first_of(','))));
+			sites.erase(0, sites.find_first_of(',') + 1);
+		}
+		vsites.push_back(trim(sites));
+	}
 	return vsites;
 }
 

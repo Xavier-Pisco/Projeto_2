@@ -10,6 +10,8 @@ void changeClient(int i);
 
 void clientsMenu();
 
+void changePacket(int i);
+
 void packetsMenu();
 
 void mainMenu(Agency agency);

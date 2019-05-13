@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <stdio.h>
+#include <map>
+#include <set>
 
 void changeClient(int i)
 {
@@ -305,6 +307,7 @@ void clientsMenu()
 					}
 
 					vclients[i].buyPacket(packet);
+					break;
 				}
 				else if (i == vclients.size() - 1)
 					cout << "Cliente nao encontrado." << endl;
@@ -464,6 +467,7 @@ void packetsMenu()
 		cout << "5. Adicionar um pacote" << endl;
 		cout << "6. Remover um pacote" << endl;
 		cout << "7. Alterar um pacote" << endl;
+		cout << "8. Ver pacotes com locais mais visitados" << endl;
 		cout << "0. Voltar atras" << endl;
 
 		cin >> menuChecker;
@@ -665,6 +669,26 @@ void packetsMenu()
 			}
 		}
 
+		else if (menuChecker == 8)
+		{
+
+			map<string, unsigned> mostVisited = mapMostVisited();
+			
+			auto cmp = [](const auto & p1, const auto & p2)
+			{
+				return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
+			};
+
+			set < pair<string, unsigned>, decltype(cmp)> s(mostVisited.begin(), mostVisited.end(), cmp);
+
+			for (const auto& p : s)
+			{
+				cout << p.second << " - " << p.first << endl;
+			}
+
+
+		}
+
 		else if (menuChecker == 0)
 		break;
 
@@ -704,4 +728,4 @@ void mainMenu(Agency agency)
 			cout << "Dados invalidos" << endl;
 	}
 }
-    
+   

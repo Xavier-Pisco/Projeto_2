@@ -56,4 +56,6 @@ extern vector<Packet> vpackets;
 
 Packet getPacketFromId(const unsigned packetId);
 
+bool checkIfPacketExist(const unsigned packetId);
+
 vector<string> sitesFromString(string sites);
