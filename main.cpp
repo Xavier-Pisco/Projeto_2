@@ -14,10 +14,21 @@ bool checkIfPacketExist(const unsigned packetId)
 		{
 			return true;
 		}
-
-		else if (i == vpackets.size() - 1)
-			return false;
 	}
+	return false;
+}
+
+bool checkIfClientExist(const unsigned NIF)
+{
+	for (unsigned i = 0; i < vclients.size(); i++)
+	{
+		if (vclients[i].getVATnumber() == NIF)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 map<string, unsigned> mapMostVisited()

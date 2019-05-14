@@ -170,7 +170,23 @@ void clientsMenu()
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
-			getClientFromNIF(NIF).show();
+			while (cin.fail())
+			{
+				cout << "NIF invalido.\nInsira novamente: ";
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cin >> NIF;
+			}
+
+			if (checkIfClientExist(NIF))
+			{
+				getClientFromNIF(NIF).show();
+			}
+			else
+			{
+				cout << "Cliente nao encontrado" << endl;
+			}
+			
 		}
 
 
