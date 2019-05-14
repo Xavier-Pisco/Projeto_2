@@ -289,6 +289,7 @@ void clientsMenu()
 			{
 				cout << "Dados invalidos \n NIF do cliente: ";
 				cin.clear();
+				cin.ignore(1000, '\n');
 				cin >> NIF;
 			}
 			
@@ -310,6 +311,14 @@ void clientsMenu()
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
+
+			while (cin.fail())
+			{
+				cout << "Dados invalidos \n NIF do cliente: ";
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cin >> NIF;
+			}
 
 			for (unsigned i = 0; i < vclients.size(); i++)
 			{
