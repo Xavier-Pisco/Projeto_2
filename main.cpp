@@ -202,9 +202,37 @@ void openPacketsFile(string filename)
 
 
 int main(){
-	string AGENCY_FILE_NAME;
-	cout << "Agency file: ";
+	int agency_line_checker = 0;
+	ifstream agency_file_name;
+	string AGENCY_FILE_NAME, checking_agency = "", line_agency_file;
+	cout << "Nome do ficheiro da agencia: ";
 	cin >> AGENCY_FILE_NAME;
+	agency_file_name.open(AGENCY_FILE_NAME);
+	while (getline(agency_file_name, line_agency_file))
+	{
+		if (agency_line_checker == 4)
+		{
+			checking_agency = line_agency_file;
+		}
+		agency_line_checker++;
+	}
+	while (checking_agency == "")
+	{
+		agency_line_checker = 0;
+		agency_file_name.close();
+		cout << "Ficheiro nao encontrado" << endl << "Nome do ficheiro da agencia: ";
+		cin >> AGENCY_FILE_NAME;
+		agency_file_name.open(AGENCY_FILE_NAME);
+		while (getline(agency_file_name, line_agency_file))
+		{
+			if (agency_line_checker == 4)
+			{
+				checking_agency = line_agency_file;
+			}
+			agency_line_checker++;
+		}
+	}
+	agency_file_name.close();
 	Agency agency(AGENCY_FILE_NAME);   // create the agency
 
 	openClientsFile(agency.getClientsFilename());
