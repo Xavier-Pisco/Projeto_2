@@ -192,7 +192,6 @@ void clientsMenu()
 			
 		}
 
-
 		else if (checker_clients == 3)
 		{
 			cout << "Nome: ";
