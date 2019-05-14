@@ -175,9 +175,9 @@ void clientsMenu()
 
 			while (cin.fail())
 			{
-				cout << "NIF invalido.\nInsira novamente: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
+				cout << "Dados invalidos" << endl << "NIF do cliente: ";
 				cin >> NIF;
 			}
 
@@ -287,8 +287,9 @@ void clientsMenu()
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \n NIF do cliente: ";
 				cin.clear();
+				cin.ignore(10000, '\n');
+				cout << "Dados invalidos" << endl << "NIF do cliente: ";
 				cin >> NIF;
 			}
 			
