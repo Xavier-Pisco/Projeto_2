@@ -1,9 +1,7 @@
 #pragma warning(disable : 4996)
 #include "Date.h"
 #include <ctime>
-#include <string>
-#include <iostream>
-#include <iomanip>
+
 
 using namespace std;
 

@@ -1,12 +1,5 @@
 #include "Menus.h"
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <fstream>
-#include <sstream>
-#include <stdio.h>
-#include <map>
-#include <set>
+
 
 void changeClient(int i)
 {
@@ -386,7 +379,7 @@ void clientsMenu()
 					}
 				}
 			}
-			int count = 0;
+			unsigned count = 0;
 
 			for (const auto& p : s)
 			{
@@ -426,7 +419,7 @@ void clientsMenu()
 
 void changePacket(int i)
 {
-	int menuChecker, pricePerPerson, seatsAvailable, seatsBought;
+	unsigned menuChecker, pricePerPerson, seatsAvailable, seatsBought;
 	string sites, sbegin, send;
 
 	while (true)
