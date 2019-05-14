@@ -1,5 +1,5 @@
 #include "Menus.h"
-
+#include <algorithm>
 
 void changeClient(int i)
 {
@@ -681,12 +681,11 @@ void packetsMenu()
 		{
 			string location;
 			int counter = 0;
-
 			cin.ignore(1000, '\n');
-
 			cout << "Local turistico: ";
 			getline(cin, location);
-
+			trim(location);
+			location[0] = toupper(location[0]);
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
 				if (vpackets[i].searchLocation(location))
