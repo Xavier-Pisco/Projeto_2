@@ -27,6 +27,7 @@ void changeClient(int i)
 		else if (menuChecker == 1)
 		{
 			cout << "Nome do cliente: ";
+			cin.ignore(1000, '\n');
 			getline(cin, name);
 			vclients[i].setName(name);
 		}
@@ -61,6 +62,7 @@ void changeClient(int i)
 			}
 
 			vclients[i].setVATnumber(NIF);
+			checkNIF = true;
 		}
 
 		else if (menuChecker == 3)
@@ -82,6 +84,7 @@ void changeClient(int i)
 		else if (menuChecker == 4)
 		{
 			cout << "Rua: ";
+			cin.ignore(1000, '\n');
 			getline(cin, street);
 			while (cin.fail())
 			{
