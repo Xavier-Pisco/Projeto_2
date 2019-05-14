@@ -5,6 +5,34 @@
 // #include "utils.h"
 using namespace std;
 
+bool(checkIfDateIsPossible(string date))
+{
+	int count = 0;
+	for (int i = 0; i < date.size(); i++)
+	{
+		if (date[i] == '/')
+			count += 1;
+	}
+
+	if (count != 2)
+		return false;
+
+	string year, month, day;
+
+	year = date.substr(0, date.find_first_of('/'));
+	date.erase(0, date.find_first_of('/'));
+
+	month = date.substr(0, date.find_first_of('/'));
+	date.erase(0, date.find_first_of('/'));
+
+	day = date.substr(0, date.find_first_of('/'));
+
+	if (stringIsNumber(year) && stringIsNumber(month) && stringIsNumber(day))
+		return true;
+
+	else
+		return false;
+}
 
 bool checkIfPacketExist(const unsigned packetId)
 {
@@ -43,10 +71,8 @@ map<string, unsigned> mapMostVisited()
 			{
 				Packet packet = getPacketFromId(vclients[i].getPacketList()[x]);
 
-				for (int a = 0; a < packet.getSites().size(); a++)
-				{
-					mostVisited[packet.getSites()[a]] = 0;
-				}
+				mostVisited[packet.getAllSites()] = 0;
+				
 			}
 
 		}
@@ -60,10 +86,8 @@ map<string, unsigned> mapMostVisited()
 			{
 				Packet packet = getPacketFromId(vclients[i].getPacketList()[x]);
 
-				for (int a = 0; a < packet.getSites().size(); a++)
-				{
-					mostVisited[packet.getSites()[a]] += 1;
-				}
+				mostVisited[packet.getAllSites()] += 1;
+
 			}
 		}
 	}

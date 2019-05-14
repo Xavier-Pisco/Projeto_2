@@ -24,6 +24,7 @@ class Packet{
   // GET methods
   unsigned getId() const;
   vector<string> getSites() const;
+  string getAllSites() const;
   Date getBeginDate() const;
   Date getEndDate() const;
   double getPricePerPerson() const;

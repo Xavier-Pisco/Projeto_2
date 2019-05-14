@@ -37,3 +37,5 @@ public:
 	//friend ostream& operator<<(ostream& out, const Date& date);
 
 };
+
+bool(checkIfDateIsPossible(string date));

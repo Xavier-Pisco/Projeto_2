@@ -64,6 +64,23 @@ vector<string> Packet::getSites() const{
 	return sites;
 }
 
+string Packet::getAllSites() const
+{
+	string content;
+	for (int i = 0; i < sites.size(); i++)
+	{
+		if (i == 0)
+			content += sites[i] + " - ";
+
+		else if (i != sites.size() - 1)
+			content += sites[i] + ", ";
+		else
+			content += sites[i];
+	}
+
+	return content;
+}
+
 Date Packet::getBeginDate() const {
 
 	return begin;

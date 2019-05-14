@@ -399,15 +399,12 @@ void clientsMenu()
 				{
 					Packet packet = getPacketFromId(packets[i]);
 
-					for (int x = 0; x < packet.getSites().size(); x++)
+					for (const auto& p : s)
 					{
-						for (const auto& p : s)
+						if (packet.getAllSites() == p.first)
 						{
-							if (packet.getSites()[x] == p.first)
-							{
-								s.erase(p);
-								break;
-							}
+							s.erase(p);
+							break;
 						}
 					}
 				}
@@ -420,20 +417,17 @@ void clientsMenu()
 				{
 					for (int i = 0; i < vpackets.size(); i++)
 					{
-						for (int x = 0; x < vpackets[i].getSites().size(); x++)
+						if (vpackets[i].getAllSites() == p.first)
 						{
-							if (vpackets[i].getSites()[x] == p.first)
+							if (p.second > 1)
 							{
-								if (p.second > 1)
-								{
-									cout << p.first << " tem " << p.second << " clientes que ja visitaram e esta disponivel no pacote " << vpackets[i].getId() << endl;
-									count += 1;
-								}
-								else
-								{
-									cout << p.first << " tem " << p.second << " cliente que ja visitou e esta disponivel no pacote " << vpackets[i].getId() << endl;
-									count += 1;
-								}
+								cout << "O pacote " << vpackets[i].getId() << ", com destino a \"" << p.first << "\" ja foi visitado por " << p.second << " clientes" << endl;
+								count += 1;
+							}
+							else
+							{
+								cout << "O pacote " << vpackets[i].getId() << ", com destino a \"" << p.first << "\" ja foi visitado por " << p.second << " cliente" << endl;
+								count += 1;
 							}
 						}
 					}
@@ -489,6 +483,12 @@ void changePacket(int i)
 			cin.ignore(1000, '\n');
 			getline(cin, sbegin);
 
+			while (!checkIfDateIsPossible(sbegin))
+			{
+				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				getline(cin, sbegin);
+			}
+
 			Date begin(sbegin);
 
 			if (begin.isAfter(vpackets[i].getEndDate()))
@@ -505,6 +505,12 @@ void changePacket(int i)
 			cout << "Escreva a data de fim: ";
 			cin.ignore(1000, '\n');
 			getline(cin, send);
+
+			while (!checkIfDateIsPossible(send))
+			{
+				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				getline(cin, send);
+			}
 
 			Date end(send);
 
@@ -652,11 +658,26 @@ void packetsMenu()
 			vector<Packet> showPackets;
 			string date;
 			cout << "Insira data inicial(AAAA/MM/DD): ";
-			cin >> date;
+			cin.ignore(1000, '\n');
+			getline(cin, date);
+
+			while (!checkIfDateIsPossible(date))
+			{
+				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				getline(cin, date);
+			}
+
 			Date begin(date);
 
 			cout << "Insira data final(AAAA/MM/DD): ";
-			cin >> date;
+			getline(cin, date);
+
+			while (!checkIfDateIsPossible(date))
+			{
+				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				getline(cin, date);
+			}
+
 			Date end(date);
 
 			for (unsigned i = 0; i < vpackets.size(); i++)
@@ -710,6 +731,8 @@ void packetsMenu()
 			while (cin.fail())
 			{
 				cout << "Id invalido. Insira novamente: ";
+				cin.clear();
+				cin.ignore(1000, '\n');
 				cin >> packetId;
 			}
 
@@ -737,10 +760,24 @@ void packetsMenu()
 
 			cout << "Data de inicio (AAAA/MM/DD): ";
 			getline(cin, sbegin);
+
+			while (!checkIfDateIsPossible(sbegin))
+			{
+				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				getline(cin, sbegin);
+			}
+
 			Date begin(sbegin);
 
 			cout << "Data de fim (AAAA/MM/DD): ";
 			getline(cin, send);
+
+			while (!checkIfDateIsPossible(send))
+			{
+				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				getline(cin, send);
+			}
+
 			Date end(send);
 
 			while (end.isBefore(begin))
