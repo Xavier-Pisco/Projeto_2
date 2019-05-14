@@ -17,7 +17,14 @@ void changeClient(int i)
 
 		cin >> menuChecker;
 
-		if (menuChecker == 1)
+		if (cin.fail())
+		{
+			cout << "Insira um numero" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+
+		else if (menuChecker == 1)
 		{
 			cout << "Nome do cliente: ";
 			getline(cin, name);
@@ -135,8 +142,15 @@ void clientsMenu()
 		cout << "7. Ver locais recomendados para um cliente" << endl;
 		cout << "0. Voltar" << endl;
 		cin >> checker_clients;
+
+		if (cin.fail())
+		{
+			cout << "Insira um numero" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
 		
-		if (checker_clients == 1)
+		else if (checker_clients == 1)
 		{
 			i = 0;
 			while (i < vclients.size())
@@ -434,7 +448,14 @@ void changePacket(int i)
 
 		cin >> menuChecker;
 
-		if (menuChecker == 1)
+		if (cin.fail())
+		{
+			cout << "Insira um numero" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+
+		else if (menuChecker == 1)
 		{
 			cout << "Ecreva o destino: ";
 			cin.ignore(1000, '\n');
@@ -565,7 +586,14 @@ void packetsMenu()
 
 		cin >> menuChecker;
 
-		if (menuChecker == 1)
+		if (cin.fail())
+		{
+			cout << "Insira um numero" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+
+		else if (menuChecker == 1)
 		{
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
@@ -801,7 +829,14 @@ void mainMenu(Agency agency)
 		cout << "3. Pacotes" << endl;
 		cout << "0. Sair" << endl;
 		cin >> checker;
-		if (checker == 1)
+
+		if (cin.fail())
+		{
+			cout << "Insira um numero" << endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+		else if (checker == 1)
 		{
 			agency.show();
 		}
