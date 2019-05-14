@@ -27,6 +27,7 @@ void changeClient(int i)
 		else if (menuChecker == 1)
 		{
 			cout << "Nome do cliente: ";
+			cin.ignore(1000, '\n');
 			getline(cin, name);
 			vclients[i].setName(name);
 		}
@@ -61,6 +62,7 @@ void changeClient(int i)
 			}
 
 			vclients[i].setVATnumber(NIF);
+			checkNIF = true;
 		}
 
 		else if (menuChecker == 3)
@@ -82,6 +84,7 @@ void changeClient(int i)
 		else if (menuChecker == 4)
 		{
 			cout << "Rua: ";
+			cin.ignore(1000, '\n');
 			getline(cin, street);
 			while (cin.fail())
 			{
@@ -170,7 +173,23 @@ void clientsMenu()
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
-			getClientFromNIF(NIF).show();
+			while (cin.fail())
+			{
+				cout << "NIF invalido.\nInsira novamente: ";
+				cin.clear();
+				cin.ignore(1000, '\n');
+				cin >> NIF;
+			}
+
+			if (checkIfClientExist(NIF))
+			{
+				getClientFromNIF(NIF).show();
+			}
+			else
+			{
+				cout << "Cliente nao encontrado" << endl;
+			}
+			
 		}
 
 
