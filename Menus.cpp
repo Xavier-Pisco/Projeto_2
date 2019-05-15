@@ -116,6 +116,7 @@ void changeClient(int i)
 			getline(cin, location);
 
 			Address address(street, doorNumber, floor, postalCode, location);
+			vclients[i].setAddress(address);
 		}
 
 		else if (menuChecker == 0)
@@ -763,7 +764,7 @@ void packetsMenu()
 				}
 
 				else if (i == vpackets.size() - 1)
-					cout << "Pacote nao encontrado." << endl;
+					cout << "Pacote nao encontrado" << endl;
 			}
 		}
 
@@ -842,7 +843,7 @@ void packetsMenu()
 					break;
 				}
 				else if (i == vpackets.size() - 1)
-					cout << "Pacote nao encontrado." << endl;
+					cout << "Pacote nao encontrado" << endl;
 			}
 		}
 
@@ -860,7 +861,7 @@ void packetsMenu()
 					break;
 				}
 				else if (i == vpackets.size() - 1)
-					cout << "Pacote nao encontrado." << endl;
+					cout << "Pacote nao encontrado" << endl;
 			}
 		}
 

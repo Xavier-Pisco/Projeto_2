@@ -170,71 +170,75 @@ void Client::buyPacket(int packetId)
 {
 	Packet packet = getPacketFromId(packetId);
 
-	if (packets.size() == 0)
+	if (checkIfPacketExist(packetId))
 	{
-		for (unsigned i = 0; i < vpackets.size(); i++)
+
+		if (packets.size() == 0)
 		{
-			if (vpackets[i].getId() == packetId)
+			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
-				if (packet.getPacketAvailable())
+				if (vpackets[i].getId() == packetId)
 				{
-					this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
-					this->packets.push_back(packetId);
-					for (int x = 0; x < vpackets.size(); x++)
+					if (packet.getPacketAvailable())
 					{
-						if (packetId == vpackets[x].getId())
-							vpackets[x].setSeatsBought(vpackets[x].getSeatsBought() + familySize);
-					}					cout << "Compra efetuada." << endl;
-				}
-				else
-					cout << "Pacote nao tem mais lugares disponiveis." << endl;
-
-				break;
-
-			}
-
-			else if (i == vpackets.size() - 1)
-				cout << "Pacote nao encotrado." << endl;
-		}
-	}
-	else
-	{
-		for (unsigned i = 0; i < packets.size(); i++)
-		{
-			if (packets[i] == packetId)
-			{
-				cout << "Ja comprou lugar neste pacote." << endl;
-				break;
-			}
-
-			else if (i == packets.size() - 1)
-			{
-				for (unsigned i = 0; i < vpackets.size(); i++)
-				{
-					if (vpackets[i].getId() == packetId)
-					{
-						if (packet.getPacketAvailable())
+						this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
+						this->packets.push_back(packetId);
+						for (int x = 0; x < vpackets.size(); x++)
 						{
-							this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
-							this->packets.push_back(packetId);
-							for (int x = 0; x < vpackets.size(); x++)
-							{
-								if (packetId == vpackets[x].getId())
-									vpackets[x].setSeatsBought(vpackets[x].getSeatsBought() + familySize);
-							}
-							cout << "Compra efetuada." << endl;
-						}
-						else
-							cout << "Pacote nao tem mais lugares disponiveis." << endl;
-
-						break;
-
+							if (packetId == vpackets[x].getId())
+								vpackets[x].setSeatsBought(vpackets[x].getSeatsBought() + familySize);
+						}					cout << "Compra efetuada" << endl;
 					}
+					else
+						cout << "Pacote nao tem mais lugares disponiveis" << endl;
 
-					else if (i == vpackets.size() - 1)
-						cout << "Pacote nao encotrado." << endl;
+					break;
+
 				}
-				break;
+
+				else if (i == vpackets.size() - 1)
+					cout << "Pacote nao encontrado" << endl;
+			}
+		}
+		else
+		{
+			for (unsigned i = 0; i < packets.size(); i++)
+			{
+				if (packets[i] == packetId)
+				{
+					cout << "Ja comprou lugar neste pacote" << endl;
+					break;
+				}
+
+				else if (i == packets.size() - 1)
+				{
+					for (unsigned i = 0; i < vpackets.size(); i++)
+					{
+						if (vpackets[i].getId() == packetId)
+						{
+							if (packet.getPacketAvailable())
+							{
+								this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
+								this->packets.push_back(packetId);
+								for (int x = 0; x < vpackets.size(); x++)
+								{
+									if (packetId == vpackets[x].getId())
+										vpackets[x].setSeatsBought(vpackets[x].getSeatsBought() + familySize);
+								}
+								cout << "Compra efetuada" << endl;
+							}
+							else
+								cout << "Pacote nao tem mais lugares disponiveis" << endl;
+
+							break;
+
+						}
+
+						else if (i == vpackets.size() - 1)
+							cout << "Pacote nao encontrado" << endl;
+					}
+					break;
+				}
 			}
 		}
 	}

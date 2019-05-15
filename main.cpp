@@ -170,7 +170,7 @@ Client getClientFromNIF(const unsigned clientNIF)
 		}
 
 		else if (i == vclients.size() - 1)
-			cout << "Cliente nao encontrado." << endl;
+			cout << "Cliente nao encontrado" << endl;
 	}
 }
 
