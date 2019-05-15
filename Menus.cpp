@@ -945,7 +945,7 @@ void packetsMenu()
 			// função para ordenar os pairs do set pelo numero de lugares comprados
 			auto cmp = [](const auto &p1, const auto &p2)
 			{
-				if (p1.second >= p2.second)
+				if (p1.second > p2.second)
 					return p2.second < p1.second;
 
 				return p1.first < p2.first;
