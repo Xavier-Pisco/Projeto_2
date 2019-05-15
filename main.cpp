@@ -16,21 +16,12 @@ bool(checkIfDateIsPossible(string date))
 	if (count != 2)
 		return false;
 
-	string year, month, day;
+	Date data(date);
 
-	year = date.substr(0, date.find_first_of('/'));
-	date.erase(0, date.find_first_of('/'));
-
-	month = date.substr(0, date.find_first_of('/'));
-	date.erase(0, date.find_first_of('/'));
-
-	day = date.substr(0, date.find_first_of('/'));
-
-	if (stringIsNumber(year) && stringIsNumber(month) && stringIsNumber(day))
+	if (data.isValid())
 		return true;
 
-	else
-		return false;
+	return false;
 }
 
 bool checkIfPacketExist(const unsigned packetId)

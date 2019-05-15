@@ -806,6 +806,7 @@ void packetsMenu()
 			while (!checkIfDateIsPossible(sbegin))
 			{
 				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cin.clear();
 				getline(cin, sbegin);
 			}
 
@@ -819,7 +820,7 @@ void packetsMenu()
 				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
 				getline(cin, send);
 			}
-
+			
 			Date end(send);
 
 			while (end.isBefore(begin))
@@ -827,7 +828,14 @@ void packetsMenu()
 				cout << "Data final nao pode anteceder a data inicial" << endl;
 				cout << "Data de fim (AAAA/MM/DD): ";
 				getline(cin, send);
-				Date end(send);
+
+				while (!checkIfDateIsPossible(send))
+				{
+					cout << "Data invalida \nInsira data inicial(AAAA/MM/DD): ";
+					getline(cin, send);
+				}
+
+				end.setDate(send);
 			}
 
 			cout << "Preco por pessoa: ";
@@ -919,7 +927,7 @@ void packetsMenu()
 		break;
 
 		else
-		cout << "Codigo nao aceite." << endl;
+		cout << "Codigo nao aceite" << endl;
 	}
 }
 

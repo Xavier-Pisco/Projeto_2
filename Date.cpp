@@ -80,6 +80,15 @@ void Date::setYear(unsigned year) {
 
 }
 
+void Date::setDate(string date)
+{
+	year = stoi(date.substr(0, date.find_first_of('/')));
+	date.erase(0, date.find_first_of('/') + 1);
+	month = stoi(date.substr(0, date.find_first_of('/')));
+	date.erase(0, date.find_first_of('/') + 1);
+	day = stoi(date);
+}
+
 
 
 void Date::show() const
