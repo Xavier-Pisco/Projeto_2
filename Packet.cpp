@@ -67,6 +67,9 @@ vector<string> Packet::getSites() const{
 string Packet::getAllSites() const
 {
 	string content;
+	if (sites.size() == 1)
+		return sites[0];
+
 	for (int i = 0; i < sites.size(); i++)
 	{
 		if (i == 0)
