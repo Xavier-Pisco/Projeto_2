@@ -943,7 +943,14 @@ void packetsMenu()
 			// corre todos os pairs do set e dá print do numero de lugares comprados - lugares do pacote
 			for (auto i = s.begin(); i != s.end(); i++)
 			{
-				cout << i->second << " - " << i->first << endl;
+				for (unsigned x = 0; x < vpackets.size(); x++)
+				{
+					if (vpackets[x].getAllSites() == i->first)
+					{
+						cout << "Pacote " << vpackets[x].getId() << " - " <<i->second << " lugares vendidos - " << i->first << endl;
+					}
+				}
+				
 			}
 
 		}
