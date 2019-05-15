@@ -62,7 +62,12 @@ map<string, unsigned> mapMostVisited()
 {	
 	map<string, unsigned> mostVisited;
 
-	for (int i = 0; i < vclients.size(); i++)
+	for (unsigned i = 0; i < vpackets.size(); i++)
+	{
+		mostVisited[vpackets[i].getAllSites()] += vpackets[i].getSeatsBought();
+	}
+
+	/*for (int i = 0; i < vclients.size(); i++)
 	{
 		for (int x = 0; x < vclients[i].getPacketList().size(); x++)
 		{
@@ -89,7 +94,7 @@ map<string, unsigned> mapMostVisited()
 
 			}
 		}
-	}
+	}*/
 
 	return mostVisited;
 }

@@ -384,38 +384,44 @@ void clientsMenu()
 			}
 
 			unsigned numero;
-			cout << "Numero máximo de destinos diferentes: ";
+			cout << "Numero máximo de recomendacoes: ";
 			cin >> numero;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \n Numero máximo de destinos diferentes: ";
+				cout << "Dados invalidos \n Numero máximo de recomendacoes: ";
 				cin.clear();
 				cin >> numero;
 			}
 
 			vector<int> packets = getClientFromNIF(NIF).getPacketList();
 
-			map<string, unsigned> mostVisited = mapMostVisited();
+			map<string, unsigned> mostVisited = mapMostVisited(); // map com <local, nº lugares comprados>
 
+			// função para ordenar o pair pelo numero de lugares comprados
 			auto cmp = [](const auto & p1, const auto & p2)
 			{
-				return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
+				if (p1.second >= p2.second)
+					return p2.second < p1.second;
+
+				return p1.first < p2.first;
 			};
 
+			// cria um set de pairs igual ao map
 			set < pair<string, unsigned>, decltype(cmp)> s(mostVisited.begin(), mostVisited.end(), cmp);
 
-			for (int i = 0; i < packets.size(); i++)
+			// elimina do set os locais que o cliente já visitou
+			for (int i = 0; i < packets.size(); i++) //corre todos os pacotes
 			{
 				if (checkIfPacketExist(packets[i]))
 				{
 					Packet packet = getPacketFromId(packets[i]);
 
-					for (const auto& p : s)
+					for (auto i = s.begin(); i != s.end(); i++) //corre todos os pairs do set
 					{
-						if (packet.getAllSites() == p.first)
+						if (packet.getAllSites() == i->first) //verifica se o local do par é o mesmo do pacote
 						{
-							s.erase(p);
+							s.erase(i);
 							break;
 						}
 					}
@@ -423,22 +429,23 @@ void clientsMenu()
 			}
 			unsigned count = 0;
 
-			for (const auto& p : s)
+			// Dá print a N destinos que estão no set
+			for (auto x = s.begin(); x != s.end(); x++) //corre todos os pairs do set
 			{
 				if (count < numero)
 				{
-					for (int i = 0; i < vpackets.size(); i++)
+					for (int i = 0; i < vpackets.size(); i++) //corre todos os pacotes
 					{
-						if (vpackets[i].getAllSites() == p.first)
+						if (vpackets[i].getAllSites() == x->first) //verifica se o local do par é o mesmo do pacote
 						{
-							if (p.second > 1)
+							if (x->second > 1)
 							{
-								cout << "O pacote " << vpackets[i].getId() << ", com destino a \"" << p.first << "\" ja foi visitado por " << p.second << " clientes" << endl;
+								cout << "O pacote " << vpackets[i].getId() << ", com destino a \"" << x->first << "\" ja foi visitado por " << x->second << " clientes" << endl;
 								count += 1;
 							}
 							else
 							{
-								cout << "O pacote " << vpackets[i].getId() << ", com destino a \"" << p.first << "\" ja foi visitado por " << p.second << " cliente" << endl;
+								cout << "O pacote " << vpackets[i].getId() << ", com destino a \"" << x->first << "\" ja foi visitado por " << x->second << " cliente" << endl;
 								count += 1;
 							}
 						}
@@ -717,7 +724,7 @@ void packetsMenu()
 			cin.ignore(1000, '\n');
 			cout << "Local turistico: ";
 			getline(cin, location);
-			trim(location);
+			location = trim(location);
 			location[0] = toupper(location[0]);
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
@@ -861,19 +868,26 @@ void packetsMenu()
 		{
 
 			map<string, unsigned> mostVisited = mapMostVisited();
+
 			
-			auto cmp = [](const auto & p1, const auto & p2)
+
+			// função para ordenar os pairs do set pelo numero de lugares comprados
+			auto cmp = [](const auto p1, const auto p2)
 			{
-				return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
+				if (p1.second >= p2.second)
+					return p2.second < p1.second;
+
+				return p1.first < p2.first;
 			};
 
+			// cria um set de pairs igual ao map
 			set < pair<string, unsigned>, decltype(cmp)> s(mostVisited.begin(), mostVisited.end(), cmp);
 
-			for (const auto& p : s)
+			// corre todos os pairs do set e dá print do numero de lugares comprados - lugares do pacote
+			for (auto i = s.begin(); i != s.end(); i++)
 			{
-				cout << p.second << " - " << p.first << endl;
+				cout << i->second << " - " << i->first << endl;
 			}
-
 
 		}
 
