@@ -621,6 +621,13 @@ void changePacket(int i)
 				cout << "Numeros de lugares total nao pode ser menor que o numero de lugares vendidos" << endl;
 				cout << "Insira o numero de lugares total novamente: ";
 				cin >> seatsAvailable;
+
+				while (cin.fail())
+				{
+					cout << "Dados invalidos" << endl << "Insira o numero de lugares total novamente: ";
+					cin.clear();
+					cin >> seatsAvailable;
+				}
 			}
 
 			vpackets[i].setSeatsAvailable(seatsAvailable);
@@ -638,11 +645,18 @@ void changePacket(int i)
 				cin >> seatsBought;
 			}
 
-			while (seatsBought < vpackets[i].getSeatsAvailable())
+			while (seatsBought > vpackets[i].getSeatsAvailable())
 			{
 				cout << "Numeros de lugares vendido nao pode ser maior que o numero de lugares total" << endl;
 				cout << "Insira o numero de lugares vendido novamente: ";
 				cin >> seatsBought;
+
+				while (cin.fail())
+				{
+					cout << "Dados invalidos" << "Insira o numero de lugares vendidos novamente: ";
+					cin.clear();
+					cin >> seatsBought;
+				}
 			}
 
 			vpackets[i].setSeatsBought(seatsBought);
