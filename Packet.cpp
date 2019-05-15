@@ -169,6 +169,7 @@ void Packet::setSeatsAvailable(unsigned seatsAvailable)
 
 void Packet::setSeatsBought(unsigned seatsBought)
 {
+
 	this->seatsBought = seatsBought;
 
 	if (seatsAvailable == seatsBought)
