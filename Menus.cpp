@@ -782,7 +782,7 @@ void packetsMenu()
 
 			while (!checkIfDateIsPossible(date))
 			{
-				cout << "Dados invalidos\n" << endl << "Insira data inicial(AAAA/MM/DD): ";
+				cout << "Dados invalidos\n" << endl << "Insira data final(AAAA/MM/DD): ";
 				getline(cin, date);
 			}
 

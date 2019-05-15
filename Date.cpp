@@ -112,7 +112,7 @@ bool Date::isValid() const
 				return true;
 			}
 		}
-		else
+		else if (month == 4 || month == 6 || month == 9 || month == 11 )
 		{
 			if (day <= 30 && day > 0)
 				return true;
@@ -127,12 +127,12 @@ bool Date::isValid() const
 				return true;
 			}
 		}
-		else if (month != 2)
+		else if (month == 4 || month == 6 || month == 9 || month == 11)
 		{
 			if (day <= 30 && day > 0)
 				return true;
 		}
-		else
+		else if (month == 2)
 		{
 			if (day <= 28 && day > 0)
 				return true;
