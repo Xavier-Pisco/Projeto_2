@@ -5,7 +5,6 @@ int Packet::nextId;
 Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, unsigned seatsAvailable, unsigned seatsBought){
 
 	packetAvailable = true;
-	nextId += 1;
 	id = nextId;
 	this->sites = sites;
 	begin = inicio;
@@ -15,6 +14,7 @@ Packet::Packet(vector<string> sites, Date inicio, Date fim, double precoPessoa, 
 	this->seatsBought = seatsBought;
 	if (seatsAvailable == seatsBought)
 		packetAvailable = false;
+	nextId += 1;
 }
 
 Packet::Packet(string packet)
@@ -47,7 +47,7 @@ Packet::Packet(string packet)
 	seatsBought = stoi(packet.substr(0, packet.find_first_of('\n')));
 	packet.erase(0, packet.find_first_of('\n') + 1);
 
-	nextId += 1;
+	nextId = id + 1;
 
 	
 }

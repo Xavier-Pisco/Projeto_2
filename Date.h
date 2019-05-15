@@ -26,6 +26,7 @@ public:
 	void setDay(unsigned short day);
 	void setMonth(unsigned short month);
 	void setYear(unsigned year);
+	void setDate(string date);
 
 	// outhet methods */
 	void show() const;
