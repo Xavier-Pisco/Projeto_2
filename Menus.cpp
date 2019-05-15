@@ -225,6 +225,8 @@ void clientsMenu()
 
 
 			}
+			cin.clear();
+			cin.ignore(1000000, '\n');
 
 			
 			cout << "Numero de agregado familiar: ";
@@ -254,6 +256,8 @@ void clientsMenu()
 				cin.ignore(10000000, '\n');
 				cin >> doorNumber;
 			}
+			cin.clear();
+			cin.ignore(10000, '\n');
 			
 			cout << "Andar: ";
 			cin >> floor;
