@@ -291,7 +291,7 @@ void clientsMenu()
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \n NIF do cliente: ";
+				cout << "Dados invalidos \nNIF do cliente: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cin >> NIF;
@@ -308,6 +308,8 @@ void clientsMenu()
 				else if (i == vclients.size() - 1)
 					cout << "Dados invalidos" << endl;
 			}
+			cin.clear();
+			cin.ignore(1000000, '\n');
 		}
 
 		else if (checker_clients == 5)
@@ -318,7 +320,7 @@ void clientsMenu()
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \n NIF do cliente: ";
+				cout << "Dados invalidos \nNIF do cliente: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cin >> NIF;
@@ -328,12 +330,15 @@ void clientsMenu()
 			{
 				if (vclients[i].getVATnumber() == NIF)
 				{
+					cin.clear();
+					cin.ignore(100000, '\n');
 					changeClient(i);
 					break;
 				}
 				else if (i == vclients.size() - 1)
 					cout << "Cliente nao encontrado." << endl;
 			}
+		
 		}
 
 		else if (checker_clients == 6)
@@ -342,8 +347,10 @@ void clientsMenu()
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
-			while (cin.fail())
+			while (cin.fail() || NIF < 10000000 || NIF > 999999999)
 			{
+				cin.clear();
+				cin.ignore(10000, '\n');
 				cout << "Dados invalidos" << endl << "NIF do cliente: ";
 				cin >> NIF;
 			}
@@ -353,6 +360,8 @@ void clientsMenu()
 				if (vclients[i].getVATnumber() == NIF)
 				{
 
+					cin.clear();
+					cin.ignore(10000, '\n');
 					unsigned packet;
 					cout << "Numero do pacote: ";
 					cin >> packet;
@@ -368,6 +377,8 @@ void clientsMenu()
 				else if (i == vclients.size() - 1)
 					cout << "Cliente nao encontrado" << endl;
 			}
+			cin.clear();
+			cin.ignore(100000, '\n');
 
 		}
 
@@ -381,6 +392,7 @@ void clientsMenu()
 			{
 				cout << "Dados invalidos \n NIF do cliente: ";
 				cin.clear();
+				cin.ignore(10000, '\n');
 				cin >> NIF;
 			}
 
