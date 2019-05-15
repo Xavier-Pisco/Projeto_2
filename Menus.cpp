@@ -11,36 +11,39 @@ void changeClient(int i)
 	{
 		cout << "[1] Alterar o nome" << endl;
 		cout << "[2] Alterar o NIF" << endl;
-		cout << "[3] Alterar o número de pessoas no agregado familiar" << endl;
+		cout << "[3] Alterar o numero de pessoas no agregado familiar" << endl;
 		cout << "[4] Alterar a morada" << endl;
-		cout << "[0] Voltar atrás" << endl;
+		cout << "[0] Voltar" << endl;
 
 		cin >> menuChecker;
 
 		if (cin.fail())
 		{
-			cout << "Dados invalidos" << endl;
+			cout << "Dados invalidos" << endl << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
 
 		else if (menuChecker == 1)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			cout << "Nome do cliente: ";
 			cin.ignore(1000, '\n');
 			getline(cin, name);
 			vclients[i].setName(name);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 2)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			while (checkNIF)
 			{
 				cout << "NIF: ";
 				cin >> NIF;
 				while (cin.fail() || NIF < 100000000 || NIF > 999999999)
 				{
-					cout << "Dados invalidos" << endl << "NIF: ";
+					cout << "Dados invalidos" << endl << endl << "NIF: ";
 					cin.clear();
 					cin.ignore(1000000, '\n');
 					cin >> NIF;
@@ -50,7 +53,7 @@ void changeClient(int i)
 				{
 					if (vclients[x].getVATnumber() == NIF)
 					{
-						cout << "NIF ja existente " << endl;
+						cout << "NIF ja existente " << endl << endl;
 						break;
 					}
 
@@ -63,26 +66,30 @@ void changeClient(int i)
 
 			vclients[i].setVATnumber(NIF);
 			checkNIF = true;
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 3)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			cout << "Numero de pessoas no agregado familiar: ";
 			cin >> familySize;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos" << endl << "Numero de pessoas no agregado familiar: ";
+				cout << "Dados invalidos" << endl << endl << "Numero de pessoas no agregado familiar: ";
 				cin.clear();
 				cin.ignore(100000000, '\n');
 				cin >> familySize;
 			}
 
 			vclients[i].setFamilySize(familySize);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 4)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			cout << "Rua: ";
 			cin.ignore(1000, '\n');
 			getline(cin, street);
@@ -95,7 +102,7 @@ void changeClient(int i)
 			cin >> doorNumber;
 			while (cin.fail())
 			{
-				cout << "Dados invalidos" << endl << "Numero da porta: ";
+				cout << "Dados invalidos" << endl << endl << "Numero da porta: ";
 				cin.clear();
 				cin.ignore(10000000, '\n');
 				cin >> doorNumber;
@@ -103,12 +110,13 @@ void changeClient(int i)
 
 			cout << "Andar: ";
 			cin >> floor;
-
+			cin.clear();
+			cin.ignore(100000, '\n');
 			cout << "Codigo postal(xxxx-yyy): ";
 			getline(cin, postalCode);
 			while (!postalCodeChecker(postalCode))
 			{
-				cout << "Dados invalidos" << endl << "Codigo postal(xxxx-yyy): ";
+				cout << "Dados invalidos" << endl << endl << "Codigo postal(xxxx-yyy): ";
 				getline(cin, postalCode);
 			}
 
@@ -117,13 +125,14 @@ void changeClient(int i)
 
 			Address address(street, doorNumber, floor, postalCode, location);
 			vclients[i].setAddress(address);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 0)
 			break;
 
 		else
-			cout << "Dados invalidos" << endl;
+			cout << "Dados invalidos" << endl << endl;
 	}
 }
 
@@ -404,7 +413,7 @@ void clientsMenu()
 			cin >> NIF;
 
 			if (!checkIfClientExist(NIF))
-				cout << "Cliente nao encontrado" << endl;
+				cout << "Cliente nao encontrado" << endl << endl;
 
 			while (!checkIfClientExist(NIF))
 			{
@@ -413,14 +422,14 @@ void clientsMenu()
 
 				while (cin.fail())
 				{
-					cout << "Dados invalidos \n NIF do cliente: ";
+					cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
 					cin.clear();
 					cin.ignore(10000, '\n');
 					cin >> NIF;
 				}
 
 				if (!checkIfClientExist(NIF))
-					cout << "Cliente nao encontrado" << endl;
+					cout << "Cliente nao encontrado" << endl << endl;
 
 			}
 
@@ -529,29 +538,31 @@ void changePacket(int i)
 
 		if (cin.fail())
 		{
-			cout << "Insira um numero" << endl;
+			cout << "Dados invalidos" << endl << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
 
 		else if (menuChecker == 1)
 		{
-			cout << "Ecreva o destino: ";
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			cout << "Destino: ";
 			cin.ignore(1000, '\n');
 			getline(cin, sites);
-
 			vpackets[i].setSites(sitesFromString(sites));
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 2)
 		{
-			cout << "Escreva a data de inicio: ";
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			cout << "Data de inicio: ";
 			cin.ignore(1000, '\n');
 			getline(cin, sbegin);
 
 			while (!checkIfDateIsPossible(sbegin))
 			{
-				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cout << "Data invalida.\n" << endl << "Data de inicio (AAAA/MM/DD): ";
 				getline(cin, sbegin);
 			}
 
@@ -564,17 +575,19 @@ void changePacket(int i)
 			{
 				vpackets[i].setBeginDate(begin);
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 3)
 		{
-			cout << "Escreva a data de fim: ";
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			cout << "Data de fim: ";
 			cin.ignore(1000, '\n');
 			getline(cin, send);
 
 			while (!checkIfDateIsPossible(send))
 			{
-				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cout << "Dados invalidos\n" << endl << "Data de fim (AAAA/MM/DD): ";
 				getline(cin, send);
 			}
 
@@ -587,65 +600,89 @@ void changePacket(int i)
 			{
 				vpackets[i].setBeginDate(end);
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 4)
 		{
-			cout << "Escreva o preco por pessoa: ";
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			cout << "Preco por pessoa: ";
 			cin >> pricePerPerson;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos" << "Insira o preco por pessoa novamente: ";
+				cout << "Dados invalidos" << endl << endl << "Preco por pessoa: ";
 				cin.clear();
+				cin.ignore(10000, '\n');
 				cin >> pricePerPerson;
 			}
 
 			vpackets[i].setPricePerPerson(pricePerPerson);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 5)
 		{
-			cout << "Escreva o numero de lugares total: ";
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			cout << "Numero de lugares total: ";
 			cin >> seatsAvailable;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos" << endl << "Insira o numero de lugares total novamente: ";
+				cout << "Dados invalidos" << endl << endl << "Numero de lugares total: ";
 				cin.clear();
+				cin.ignore(10000, '\n');
 				cin >> seatsAvailable;
 			}
 
 			while (seatsAvailable < vpackets[i].getSeatsBought())
 			{
-				cout << "Numeros de lugares total nao pode ser menor que o numero de lugares vendidos" << endl;
-				cout << "Insira o numero de lugares total novamente: ";
+				cout << "Numeros de lugares total nao pode ser menor que o numero de lugares vendidos" << endl << endl;
+				cout << "Numero de lugares total: ";
 				cin >> seatsAvailable;
+				while (cin.fail())
+				{
+					cout << "Dados invalidos" << endl << endl << "Numero de lugares total: ";
+					cin.clear();
+					cin.ignore(10000, '\n');
+					cin >> seatsAvailable;
+				}
 			}
 
 			vpackets[i].setSeatsAvailable(seatsAvailable);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 6)
 		{
-			cout << "Escreva o numero de lugares vendidos: ";
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			cout << "Numero de lugares vendidos: ";
 			cin >> seatsBought;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos" << "Insira o numero de lugares vendidos novamente: ";
+				cout << "Dados invalidos" << endl << endl << "Numero de lugares vendidos: ";
 				cin.clear();
+				cin.ignore(10000, '\n');
 				cin >> seatsBought;
 			}
 
 			while (seatsBought < vpackets[i].getSeatsAvailable())
 			{
-				cout << "Numeros de lugares vendido nao pode ser maior que o numero de lugares total" << endl;
-				cout << "Insira o numero de lugares vendido novamente: ";
+				cout << "Numeros de lugares vendido nao pode ser maior que o numero de lugares total" << endl << endl;
+				cout << "Numero de lugares vendidos: ";
 				cin >> seatsBought;
+				while (cin.fail())
+				{
+					cout << "Dados invalidos" << endl << endl << "Numero de lugares vendidos: ";
+					cin.clear();
+					cin.ignore(10000, '\n');
+					cin >> seatsBought;
+				}
 			}
 
 			vpackets[i].setSeatsBought(seatsBought);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 0)
@@ -665,27 +702,28 @@ void packetsMenu()
 
 	while (true)
 	{
-		cout << "1. Ordenar por data" << endl;
-		cout << "2. Entre duas datas" << endl;
-		cout << "3. Procurar por local turistico" << endl;
-		cout << "4. Ver dados de um pacote" << endl;
-		cout << "5. Adicionar um pacote" << endl;
-		cout << "6. Remover um pacote" << endl;
-		cout << "7. Alterar um pacote" << endl;
-		cout << "8. Ver pacotes com locais mais visitados" << endl;
-		cout << "0. Voltar atras" << endl;
+		cout << "[1] Ordenar por data" << endl;
+		cout << "[2] Entre duas datas" << endl;
+		cout << "[3] Procurar por local turistico" << endl;
+		cout << "[4] Ver dados de um pacote" << endl;
+		cout << "[5] Adicionar um pacote" << endl;
+		cout << "[6] Remover um pacote" << endl;
+		cout << "[7] Alterar um pacote" << endl;
+		cout << "[8] Ver pacotes com locais mais visitados" << endl;
+		cout << "[0] Voltar atras" << endl;
 
 		cin >> menuChecker;
 
 		if (cin.fail())
 		{
-			cout << "Insira um numero" << endl;
+			cout << "Dados invalidos" << endl << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
 
 		else if (menuChecker == 1)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
 				if (orderedPackets.size() == 0)
@@ -708,6 +746,7 @@ void packetsMenu()
 						}
 					}
 				}
+				cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			}
 
 			for (unsigned i = 0; i < orderedPackets.size(); i++)
@@ -723,6 +762,7 @@ void packetsMenu()
 
 		else if (menuChecker == 2)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			vector<Packet> showPackets;
 			string date;
 			cout << "Insira data inicial(AAAA/MM/DD): ";
@@ -731,7 +771,7 @@ void packetsMenu()
 
 			while (!checkIfDateIsPossible(date))
 			{
-				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cout << "Dados invalidos\n" << endl << "Insira data inicial(AAAA/MM/DD): ";
 				getline(cin, date);
 			}
 
@@ -742,11 +782,12 @@ void packetsMenu()
 
 			while (!checkIfDateIsPossible(date))
 			{
-				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cout << "Dados invalidos\n" << endl << "Insira data inicial(AAAA/MM/DD): ";
 				getline(cin, date);
 			}
 
 			Date end(date);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
@@ -755,7 +796,7 @@ void packetsMenu()
 			}
 
 			if (showPackets.size() == 0)
-				cout << "Nenhum pacote encontrado." << endl;
+				cout << "Nenhum pacote encontrado" << endl;
 
 			for (unsigned i = 0; i < showPackets.size(); i++)
 			{
@@ -764,10 +805,12 @@ void packetsMenu()
 				if (i < showPackets.size() - 1)
 					cout << "::::::::::" << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 3)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			string location;
 			int counter = 0;
 			cin.ignore(1000, '\n');
@@ -785,19 +828,20 @@ void packetsMenu()
 			}
 
 			if (counter == 0)
-				cout << "Nenhum pacote tem este local turistico." << endl;
+				cout << "Nenhum pacote tem este local turistico" << endl;
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 4)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			int packetId;
-
 			cout << "Id do pacote: ";
 			cin >> packetId;
 
 			while (cin.fail())
 			{
-				cout << "Id invalido. Insira novamente: ";
+				cout << "Dados invalidos" << endl << endl << "Id do pacote: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cin >> packetId;
@@ -814,23 +858,22 @@ void packetsMenu()
 				else if (i == vpackets.size() - 1)
 					cout << "Pacote nao encontrado" << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 5)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			string sites, sbegin, send;
 			unsigned pricePerPerson, seatsAvailable, seatsBought;
-
 			cout << "Locais de destino: ";
 			cin.ignore(1000, '\n');
 			getline(cin, sites);
-
 			cout << "Data de inicio (AAAA/MM/DD): ";
 			getline(cin, sbegin);
-
 			while (!checkIfDateIsPossible(sbegin))
 			{
-				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cout << "Dados invalidos\n" << endl << "Data de inicio (AAAA/MM/DD): ";
 				cin.clear();
 				getline(cin, sbegin);
 			}
@@ -842,7 +885,7 @@ void packetsMenu()
 
 			while (!checkIfDateIsPossible(send))
 			{
-				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cout << "Dados invalidos\n" << endl << "Data de fim (AAAA/MM/DD): ";
 				getline(cin, send);
 			}
 
@@ -850,13 +893,13 @@ void packetsMenu()
 
 			while (end.isBefore(begin))
 			{
-				cout << "Data final nao pode anteceder a data inicial" << endl;
+				cout << "Data final nao pode anteceder a data inicial" << endl << endl;
 				cout << "Data de fim (AAAA/MM/DD): ";
 				getline(cin, send);
 				
 				while (!checkIfDateIsPossible(send))
 				{
-					cout << "Data invalida \nInsira data inicial(AAAA/MM/DD): ";
+					cout << "Dados invalidos\n" << endl << "Data de inicio (AAAA/MM/DD): ";
 					getline(cin, send);
 				}
 
@@ -865,18 +908,47 @@ void packetsMenu()
 
 			cout << "Preco por pessoa: ";
 			cin >> pricePerPerson;
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << endl << endl << "Preco por pessoa: ";
+				cin.clear();
+				cin.ignore(1000000, '\n');
+				cin >> pricePerPerson;
+			}
 
 			cout << "Numero de lugares total: ";
 			cin >> seatsAvailable;
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << endl << endl << "Numero de lugares total: ";
+				cin.clear();
+				cin.ignore(10000000, '\n');
+				cin >> seatsAvailable;
+			}
 
 			cout << "Numero de lugares vendidos: ";
 			cin >> seatsBought;
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << endl << endl << "Numero de lugares vendidos: ";
+				cin.clear();
+				cin.ignore(100000, '\n');
+				cin >> seatsBought;
+			}
 
 			while (seatsAvailable < seatsBought)
 			{
-				cout << "Numero de lugares vendidos nao pode ser menor que o numero de lugares total" << endl;
+				cout << "Numero de lugares vendidos nao pode ser menor que o numero de lugares total" << endl << endl;
 				cout << "Numero de lugares vendidos: ";
 				cin >> seatsBought;
+				while (cin.fail())
+				{
+					cout << "Dados invalidos" << endl << endl << "Numero de luagres vendidos: ";
+					cin.clear();
+					cin.ignore(100000, '\n');
+					cin >> seatsBought;
+				}
+				cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			}
 
 			vector<string> vsites = sitesFromString(sites);
@@ -887,10 +959,17 @@ void packetsMenu()
 
 		else if (menuChecker == 6)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned Id;
 			cout << "Id do pacote: ";
 			cin >> Id;
-
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << endl << endl << "Id do pacote: ";
+				cin.clear();
+				cin.ignore(10000, '\n');
+				cin >> Id;
+			}
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
 				if (vpackets[i].getId() == Id)
@@ -901,29 +980,41 @@ void packetsMenu()
 				else if (i == vpackets.size() - 1)
 					cout << "Pacote nao encontrado" << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 7)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned Id;
 			cout << "Id do pacote: ";
 			cin >> Id;
-
+			while (cin.fail())
+			{
+				cout << "Dados invalidos" << endl << endl << "Id do pacote: ";
+				cin.clear();
+				cin.ignore(10000, '\n');
+				cin >> Id;
+			}
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
 				if (vpackets[i].getId() == Id)
 				{
+					cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 					changePacket(i);
+					cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 					break;
 				}
 				else if (i == vpackets.size() - 1)
 					cout << "Pacote nao encontrado" << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 8)
 		{
 
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			map<string, unsigned> mostVisited = mapMostVisited();
 
 			
@@ -945,6 +1036,7 @@ void packetsMenu()
 			{
 				cout << i->second << " - " << i->first << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 
 		}
 
@@ -952,7 +1044,7 @@ void packetsMenu()
 		break;
 
 		else
-		cout << "Codigo nao aceite" << endl;
+		cout << "Dados invalidos" << endl << endl;
 	}
 }
 
@@ -962,10 +1054,10 @@ void mainMenu(Agency agency)
 	int checker;
 	while (true)
 	{
-		cout << "1. Dados da Agencia" << endl;
-		cout << "2. Clientes" << endl;
-		cout << "3. Pacotes" << endl;
-		cout << "0. Sair" << endl;
+		cout << "[1] Dados da Agencia" << endl;
+		cout << "[2] Clientes" << endl;
+		cout << "[3] Pacotes" << endl;
+		cout << "[0] Sair" << endl;
 		cin >> checker;
 
 		if (cin.fail())
