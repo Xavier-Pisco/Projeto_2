@@ -9,17 +9,17 @@ void changeClient(int i)
 
 	while (true)
 	{
-		cout << "1. Alterar o nome" << endl;
-		cout << "2. Alterar o NIF" << endl;
-		cout << "3. Alterar o número de pessoas no agregado familiar" << endl;
-		cout << "4. Alterar a morada" << endl;
-		cout << "0. Voltar atrás" << endl;
+		cout << "[1] Alterar o nome" << endl;
+		cout << "[2] Alterar o NIF" << endl;
+		cout << "[3] Alterar o número de pessoas no agregado familiar" << endl;
+		cout << "[4] Alterar a morada" << endl;
+		cout << "[0] Voltar atrás" << endl;
 
 		cin >> menuChecker;
 
 		if (cin.fail())
 		{
-			cout << "Insira um numero" << endl;
+			cout << "Dados invalidos" << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
@@ -517,13 +517,13 @@ void changePacket(int i)
 
 	while (true)
 	{
-		cout << "1. Alterar o destino" << endl;
-		cout << "2. Alterar a data de inicio" << endl;
-		cout << "3. Alterar a data de fim" << endl;
-		cout << "4. Alterar o preco por pessoa" << endl;
-		cout << "5. Alterar o numero de lugares total" << endl;
-		cout << "6. Alterar o numero de lugares vendidos" << endl;
-		cout << "0. Voltar atras" << endl;
+		cout << "[1] Alterar o destino" << endl;
+		cout << "[2] Alterar a data de inicio" << endl;
+		cout << "[3] Alterar a data de fim" << endl;
+		cout << "[4] Alterar o preco por pessoa" << endl;
+		cout << "[5] Alterar o numero de lugares total" << endl;
+		cout << "[6] Alterar o numero de lugares vendidos" << endl;
+		cout << "[0] Voltar" << endl;
 
 		cin >> menuChecker;
 
