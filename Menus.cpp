@@ -403,12 +403,25 @@ void clientsMenu()
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
-			while (cin.fail())
+			if (!checkIfClientExist(NIF))
+				cout << "Cliente nao encontrado" << endl;
+
+			while (!checkIfClientExist(NIF))
 			{
-				cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
-				cin.clear();
-				cin.ignore(10000, '\n');
+				cout << "NIF do cliente: ";
 				cin >> NIF;
+
+				while (cin.fail())
+				{
+					cout << "Dados invalidos \n NIF do cliente: ";
+					cin.clear();
+					cin.ignore(10000, '\n');
+					cin >> NIF;
+				}
+
+				if (!checkIfClientExist(NIF))
+					cout << "Cliente nao encontrado" << endl;
+
 			}
 
 			cin.clear();
@@ -704,6 +717,8 @@ void packetsMenu()
 				if (i < orderedPackets.size() - 1)
 					cout << "::::::::::" << endl;
 			}
+
+			orderedPackets = {};
 		}
 
 		else if (menuChecker == 2)
@@ -816,6 +831,7 @@ void packetsMenu()
 			while (!checkIfDateIsPossible(sbegin))
 			{
 				cout << "Data invalida.\nInsira data inicial(AAAA/MM/DD): ";
+				cin.clear();
 				getline(cin, sbegin);
 			}
 
@@ -837,7 +853,14 @@ void packetsMenu()
 				cout << "Data final nao pode anteceder a data inicial" << endl;
 				cout << "Data de fim (AAAA/MM/DD): ";
 				getline(cin, send);
-				Date end(send);
+				
+				while (!checkIfDateIsPossible(send))
+				{
+					cout << "Data invalida \nInsira data inicial(AAAA/MM/DD): ";
+					getline(cin, send);
+				}
+
+				end.setDate(send);
 			}
 
 			cout << "Preco por pessoa: ";
@@ -929,7 +952,7 @@ void packetsMenu()
 		break;
 
 		else
-		cout << "Codigo nao aceite." << endl;
+		cout << "Codigo nao aceite" << endl;
 	}
 }
 
