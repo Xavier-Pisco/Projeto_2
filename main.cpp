@@ -248,7 +248,7 @@ int main(){
 	{
 		agency_line_checker = 0;
 		agency_file_name.close();
-		cout << "Ficheiro nao encontrado" << endl << "Nome do ficheiro da agencia: ";
+		cout << "Ficheiro nao encontrado" << endl << endl << "Nome do ficheiro da agencia: ";
 		cin >> AGENCY_FILE_NAME;
 		agency_file_name.open(AGENCY_FILE_NAME);
 		while (getline(agency_file_name, line_agency_file))
@@ -261,6 +261,7 @@ int main(){
 		}
 	}
 	agency_file_name.close();
+	cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 	Agency agency(AGENCY_FILE_NAME);   // create the agency
 
 	openClientsFile(agency.getClientsFilename());

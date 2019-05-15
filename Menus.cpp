@@ -137,25 +137,26 @@ void clientsMenu()
 
 	while (true)
 	{
-		cout << "1. Dados de todos os clientes" << endl;
-		cout << "2. Dados de um cliente" << endl;
-		cout << "3. Adicionar clientes" << endl;
-		cout << "4. Remover clientes" << endl;
-		cout << "5. Alterar clientes" << endl;
-		cout << "6. Comprar pacote" << endl;
-		cout << "7. Ver locais recomendados para um cliente" << endl;
-		cout << "0. Voltar" << endl;
+		cout << "[1] Dados de todos os clientes" << endl;
+		cout << "[2] Dados de um cliente" << endl;
+		cout << "[3] Adicionar clientes" << endl;
+		cout << "[4] Remover clientes" << endl;
+		cout << "[5] Alterar clientes" << endl;
+		cout << "[6] Comprar pacote" << endl;
+		cout << "[7] Ver locais recomendados para um cliente" << endl;
+		cout << "[0] Voltar" << endl;
 		cin >> checker_clients;
 
 		if (cin.fail())
 		{
-			cout << "Insira um numero" << endl;
+			cout << "Dados invalidos" << endl << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
 		
 		else if (checker_clients == 1)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			i = 0;
 			while (i < vclients.size())
 			{
@@ -166,17 +167,19 @@ void clientsMenu()
 				}
 				i++;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (checker_clients == 2)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
 			while (cin.fail())
 			{
-				cout << "NIF invalido.\nInsira novamente: ";
+				cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cin >> NIF;
@@ -190,11 +193,13 @@ void clientsMenu()
 			{
 				cout << "Cliente nao encontrado" << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			
 		}
 
 		else if (checker_clients == 3)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			cout << "Nome: ";
 			cin.ignore(1000, '\n');
 			getline(cin, name);
@@ -205,7 +210,7 @@ void clientsMenu()
 				cin >> VATnumber;
 				while (cin.fail() || (VATnumber < 100000000 || VATnumber > 999999999))
 				{
-					cout << "Dados invalidos" << endl;
+					cout << "Dados invalidos" << endl << endl;
 					cout << "NIF: ";
 					cin.clear();
 					cin.ignore(1000000000, '\n');
@@ -216,7 +221,7 @@ void clientsMenu()
 				{
 					if (vclients[i].getVATnumber() == VATnumber)
 					{
-						cout << "NIF ja existe. " << endl;
+						cout << "NIF ja existente " << endl << endl;
 						break;
 					}
 
@@ -234,7 +239,7 @@ void clientsMenu()
 			cin >> familySize;
 			while (cin.fail() || familySize < 0)
 			{
-				cout << "Dados invalidos" << endl << "Numero de agregado familiar: ";
+				cout << "Dados invalidos" << endl << endl << "Numero de agregado familiar: ";
 				cin.clear();
 				cin.ignore(10000000, '\n');
 				cin >> familySize;
@@ -252,7 +257,7 @@ void clientsMenu()
 			cin >> doorNumber;
 			while (cin.fail() || doorNumber < 0)
 			{
-				cout << "Dados invalidos" << endl << "Numero da porta: ";
+				cout << "Dados invalidos" << endl << endl << "Numero da porta: ";
 				cin.clear();
 				cin.ignore(10000000, '\n');
 				cin >> doorNumber;
@@ -268,7 +273,7 @@ void clientsMenu()
 			getline(cin, postalCode);
 			while (!postalCodeChecker(postalCode))
 			{
-				cout << "Dados invalidos" << endl << "Codigo postal(xxxx-yyy): ";
+				cout << "Dados invalidos" << endl << endl << "Codigo postal(xxxx-yyy): ";
 				cin.clear();
 				getline(cin, postalCode);
 			}
@@ -280,18 +285,20 @@ void clientsMenu()
 			Client client(name, VATnumber, familySize, address);
 
 			vclients.push_back(client);
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 
 		}
 
 		else if (checker_clients == 4)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \nNIF do cliente: ";
+				cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cin >> NIF;
@@ -306,21 +313,23 @@ void clientsMenu()
 					break;
 				}
 				else if (i == vclients.size() - 1)
-					cout << "Dados invalidos" << endl;
+					cout << "Cliente inexistente" << endl;
 			}
 			cin.clear();
 			cin.ignore(1000000, '\n');
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (checker_clients == 5)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \nNIF do cliente: ";
+				cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
 				cin.clear();
 				cin.ignore(1000, '\n');
 				cin >> NIF;
@@ -330,19 +339,23 @@ void clientsMenu()
 			{
 				if (vclients[i].getVATnumber() == NIF)
 				{
+					cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 					cin.clear();
 					cin.ignore(100000, '\n');
 					changeClient(i);
+
 					break;
 				}
 				else if (i == vclients.size() - 1)
-					cout << "Cliente nao encontrado." << endl;
+					cout << "Cliente inexistente" << endl;
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		
 		}
 
 		else if (checker_clients == 6)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
@@ -351,7 +364,7 @@ void clientsMenu()
 			{
 				cin.clear();
 				cin.ignore(10000, '\n');
-				cout << "Dados invalidos" << endl << "NIF do cliente: ";
+				cout << "Dados invalidos" << endl << endl << "NIF do cliente: ";
 				cin >> NIF;
 			}
 
@@ -379,33 +392,40 @@ void clientsMenu()
 			}
 			cin.clear();
 			cin.ignore(100000, '\n');
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 
 		}
 
 		else if (checker_clients == 7)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			unsigned NIF;
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \n NIF do cliente: ";
+				cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
 				cin.clear();
 				cin.ignore(10000, '\n');
 				cin >> NIF;
 			}
 
+			cin.clear();
+			cin.ignore(10000, '\n');
 			unsigned numero;
-			cout << "Numero máximo de recomendacoes: ";
+			cout << "Numero maximo de recomendacoes: ";
 			cin >> numero;
 
 			while (cin.fail())
 			{
-				cout << "Dados invalidos \n Numero máximo de recomendacoes: ";
+				cout << "Dados invalidos \n" << endl << "Numero maximo de recomendacoes: ";
 				cin.clear();
+				cin.ignore(100000, '\n');
 				cin >> numero;
 			}
+			cin.clear();
+			cin.ignore(100000, '\n');
 
 			vector<int> packets = getClientFromNIF(NIF).getPacketList();
 
@@ -465,13 +485,14 @@ void clientsMenu()
 					}
 				}
 			}
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (checker_clients == 0)
 			break;
 
 		else 
-		cout << "Dados invalidos" << endl;
+		cout << "Dados invalidos" << endl << endl;
 	}
 
 }
@@ -926,28 +947,34 @@ void mainMenu(Agency agency)
 
 		if (cin.fail())
 		{
-			cout << "Insira um numero" << endl;
+			cout << "Dados invalidos" << endl << endl;
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
 		else if (checker == 1)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			agency.show();
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 		else if (checker == 2)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			clientsMenu();
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 		else if (checker == 3)
 		{
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			packetsMenu();
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 		else if (checker == 0)
 		{
 			break;
 		}
 		else
-			cout << "Dados invalidos" << endl;
+			cout << "Dados invalidos" << endl << endl;
 	}
 }
    
