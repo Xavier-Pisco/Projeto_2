@@ -384,16 +384,24 @@ void clientsMenu()
 
 		else if (checker_clients == 7)
 		{
-			unsigned NIF;
-			cout << "NIF do cliente: ";
-			cin >> NIF;
+			unsigned NIF = 0;
 
-			while (cin.fail())
+			while (!checkIfClientExist(NIF))
 			{
-				cout << "Dados invalidos \n NIF do cliente: ";
-				cin.clear();
-				cin.ignore(10000, '\n');
+				cout << "NIF do cliente: ";
 				cin >> NIF;
+
+				while (cin.fail())
+				{
+					cout << "Dados invalidos \n NIF do cliente: ";
+					cin.clear();
+					cin.ignore(10000, '\n');
+					cin >> NIF;
+				}
+
+				if (!checkIfClientExist(NIF))
+					cout << "Cliente nao encontrado" << endl;
+
 			}
 
 			unsigned numero;
@@ -683,6 +691,9 @@ void packetsMenu()
 				if (i < orderedPackets.size() - 1)
 					cout << "::::::::::" << endl;
 			}
+
+			orderedPackets = {};
+
 		}
 
 		else if (menuChecker == 2)
