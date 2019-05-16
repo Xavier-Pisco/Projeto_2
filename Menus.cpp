@@ -1071,8 +1071,8 @@ void mainMenu(Agency agency)
 		cout << "[1] Dados da Agencia" << endl;
 		cout << "[2] Clientes" << endl;
 		cout << "[3] Pacotes" << endl;
-		cout << "[4] Cancelar alterações" << endl;
-		cout << "[0] Sair e guardar" << endl;
+		cout << "[4] Cancelar alteracoes" << endl;
+		cout << "[0] Guardar e sair" << endl;
 		cin >> checker;
 
 		if (cin.fail())
