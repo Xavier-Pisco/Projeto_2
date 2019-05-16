@@ -253,26 +253,12 @@ void openPacketsFile(string filename)
 
 
 
-int main(){
-	int agency_line_checker = 0;
-	ifstream agency_file_name;
-	string AGENCY_FILE_NAME, checking_agency = "", line_agency_file;
-	cout << "Nome do ficheiro da agencia: ";
-	cin >> AGENCY_FILE_NAME;
-	agency_file_name.open(AGENCY_FILE_NAME);
-	while (getline(agency_file_name, line_agency_file))
-	{
-		if (agency_line_checker == 4)
-		{
-			checking_agency = line_agency_file;
-		}
-		agency_line_checker++;
-	}
-	while (checking_agency == "")
-	{
-		agency_line_checker = 0;
-		agency_file_name.close();
-		cout << "Ficheiro nao encontrado" << endl << endl << "Nome do ficheiro da agencia: ";
+int main()
+{
+		int agency_line_checker = 0;
+		ifstream agency_file_name;
+		string AGENCY_FILE_NAME, checking_agency = "", line_agency_file;
+		cout << "Nome do ficheiro da agencia: ";
 		cin >> AGENCY_FILE_NAME;
 		agency_file_name.open(AGENCY_FILE_NAME);
 		while (getline(agency_file_name, line_agency_file))
@@ -283,20 +269,31 @@ int main(){
 			}
 			agency_line_checker++;
 		}
-	}
-	agency_file_name.close();
-	cout << endl << setfill('*') << setw(30) << "" << endl << endl;
-	Agency agency(AGENCY_FILE_NAME);   // create the agency
+		while (checking_agency == "")
+		{
+			agency_line_checker = 0;
+			agency_file_name.close();
+			cout << "Ficheiro nao encontrado" << endl << endl << "Nome do ficheiro da agencia: ";
+			cin >> AGENCY_FILE_NAME;
+			agency_file_name.open(AGENCY_FILE_NAME);
+			while (getline(agency_file_name, line_agency_file))
+			{
+				if (agency_line_checker == 4)
+				{
+					checking_agency = line_agency_file;
+				}
+				agency_line_checker++;
+			}
+		}
+		agency_file_name.close();
+		cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+		Agency agency(AGENCY_FILE_NAME);   // create the agency
 
-	openClientsFile(agency.getClientsFilename());
+		openClientsFile(agency.getClientsFilename());
 
-	openPacketsFile(agency.getPacketsFilename());
-	
+		openPacketsFile(agency.getPacketsFilename());
+
 	mainMenu(agency);
-
-	
-
-  //mainMenu(agency); // initial menu inicial with the major options of the application
   
 	return 0;
 }

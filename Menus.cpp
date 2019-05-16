@@ -1101,7 +1101,17 @@ void mainMenu(Agency agency)
 		}
 
 		else if (checker == 4)
-			main();
+		{
+			while (vclients.size() != 0)
+				vclients.erase(vclients.begin());
+
+			while (vpackets.size() != 0)
+				vpackets.erase(vpackets.begin());
+
+			openClientsFile(agency.getClientsFilename());
+			openPacketsFile(agency.getPacketsFilename());
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+		}
 
 		else if (checker == 0)
 		{

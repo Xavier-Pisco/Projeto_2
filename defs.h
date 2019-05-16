@@ -26,3 +26,7 @@ int main();
 void saveClients(std::string file);
 
 void savePacks(std::string file);
+
+void openPacketsFile(std::string filename);
+
+void openClientsFile(std::string filename);
