@@ -746,7 +746,6 @@ void packetsMenu()
 						}
 					}
 				}
-				cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 			}
 
 			for (unsigned i = 0; i < orderedPackets.size(); i++)
@@ -758,6 +757,7 @@ void packetsMenu()
 			}
 
 			orderedPackets = {};
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 2)
