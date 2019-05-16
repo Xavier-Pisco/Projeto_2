@@ -305,7 +305,7 @@ void clientsMenu()
 			cout << "NIF do cliente: ";
 			cin >> NIF;
 
-			while (cin.fail())
+			while (cin.fail() || NIF < 10000000 || NIF > 999999999)
 			{
 				cout << "Dados invalidos \n" << endl << "NIF do cliente: ";
 				cin.clear();
@@ -390,6 +390,9 @@ void clientsMenu()
 
 					while (cin.fail())
 					{
+						cout << "Dados invalidos. Numero do pacote: ";
+						cin.clear();
+						cin.ignore(1000, '\n');
 						cin >> packet;
 					}
 
@@ -667,7 +670,7 @@ void changePacket(int i)
 				cin >> seatsBought;
 			}
 
-			while (seatsBought < vpackets[i].getSeatsAvailable())
+			while (seatsBought > vpackets[i].getSeatsAvailable())
 			{
 				cout << "Numeros de lugares vendido nao pode ser maior que o numero de lugares total" << endl << endl;
 				cout << "Numero de lugares vendidos: ";
@@ -787,7 +790,6 @@ void packetsMenu()
 			}
 
 			Date end(date);
-			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 
 			for (unsigned i = 0; i < vpackets.size(); i++)
 			{
@@ -796,7 +798,13 @@ void packetsMenu()
 			}
 
 			if (showPackets.size() == 0)
+			{
 				cout << "Nenhum pacote encontrado" << endl;
+			}
+			else
+			{
+				cout << endl << setfill('*') << setw(30) << "" << endl << endl;
+			}
 
 			for (unsigned i = 0; i < showPackets.size(); i++)
 			{
@@ -955,6 +963,8 @@ void packetsMenu()
 
 			Packet packet(vsites, begin, end, pricePerPerson, seatsAvailable, seatsBought);
 			vpackets.push_back(packet);
+
+			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 6)
@@ -1008,7 +1018,6 @@ void packetsMenu()
 				else if (i == vpackets.size() - 1)
 					cout << "Pacote nao encontrado" << endl;
 			}
-			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
 
 		else if (menuChecker == 8)
@@ -1032,9 +1041,14 @@ void packetsMenu()
 			set < pair<string, unsigned>, decltype(cmp)> s(mostVisited.begin(), mostVisited.end(), cmp);
 
 			// corre todos os pairs do set e dá print do numero de lugares comprados - lugares do pacote
+
 			for (auto i = s.begin(); i != s.end(); i++)
 			{
-				cout << i->second << " - " << i->first << endl;
+				for (unsigned x = 0; x < vpackets.size(); x++)
+				{
+					if (vpackets[x].getAllSites() == i->first)
+						cout << "Pacote " << vpackets[x].getId() << " - " <<  i->second << " clientes - " << i->first << endl;
+				}
 			}
 			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 
