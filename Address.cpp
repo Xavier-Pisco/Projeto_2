@@ -100,7 +100,7 @@ void Address::setLocation(string  location) {
 
 void Address::show() const
 {
-	cout << street << "/ " << doorNumber << " /" << floor << '/' << postalCode << '/' << location << endl;
+	cout << street << " / " << doorNumber << " / " << floor << ' / ' << postalCode << ' / ' << location << endl;
 }
 
 

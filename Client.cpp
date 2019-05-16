@@ -155,7 +155,7 @@ void Client::show() const
 	address.show();
 
 	if (packets.size() == 0)
-		cout << "\n";
+		cout << "Sem pacotes comprados" << endl;
 
 	else
 	{
