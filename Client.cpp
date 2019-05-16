@@ -149,21 +149,21 @@ void Client::setTotalPurchased(unsigned totalPurchased){
 
 void Client::show() const
 {
-	cout << name << endl;
-	cout << VATnumber << endl;
-	cout << familySize << endl;
-	address.show();
+		cout << name << endl;
+		cout << VATnumber << endl;
+		cout << familySize << endl;
+		address.show();
 
-	if (packets.size() == 0)
-		cout << "\n";
+		if (packets.size() == 0)
+			cout << "\n";
 
-	else
-	{
-		for (int i = 0; i < packets.size() - 1; i++)
-			cout << packets[i] << " ; ";
-		cout << packets[packets.size() - 1] << endl;
-	}
-	cout << totalPurchased << endl;
+		else
+		{
+			for (int i = 0; i < packets.size() - 1; i++)
+				cout << packets[i] << " ; ";
+			cout << packets[packets.size() - 1] << endl;
+		}
+		cout << totalPurchased << endl;
 }
 
 void Client::buyPacket(int packetId)
