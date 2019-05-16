@@ -20,3 +20,9 @@ std::map<std::string, unsigned> mapMostVisited();
 std::string trim(std::string str);
 
 bool stringIsNumber(std::string str);
+
+int main();
+
+void saveClients(std::string file);
+
+void savePacks(std::string file);

@@ -4,6 +4,39 @@
 #include "Client.h"
 using namespace std;
 
+void saveClients(string file)
+{
+	ofstream f(file);
+
+	for (int i = 0; i < vclients.size(); i++)
+	{
+		f << vclients[i].getContent();
+
+		if (i != vclients.size() - 1)
+			f << "::::::::::\n";
+	}
+
+
+	f.close();
+}
+
+void savePacks(string file)
+{
+	ofstream f(file);
+	f << vpackets.size() << '\n';
+	for (int i = 0; i < vpackets.size(); i++)
+	{
+		f << vpackets[i].getContent();
+
+		if (i != vpackets.size() - 1)
+		{
+			f << "::::::::::\n";
+		}
+	}
+
+	f.close();
+}
+
 bool(checkIfDateIsPossible(string date))
 {
 	int count = 0;

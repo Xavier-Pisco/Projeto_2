@@ -68,7 +68,7 @@ string Address::getLocation() const {
 
 string Address::getContent() const
 {
-	return (street + "/ " + to_string(doorNumber) + " /" + floor + "/" + postalCode + "/" + location);
+	return (street + " / " + to_string(doorNumber) + " / " + floor + " / " + postalCode + " / " + location);
 }
 
 

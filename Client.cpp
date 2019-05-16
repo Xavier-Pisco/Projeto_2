@@ -84,8 +84,8 @@ string Client::getPacketsIds() const
 
 	string content;
 	for (int i = 0; i < packets.size() - 1; i++)
-		content += packets[i] + " ; ";
-	content += packets[packets.size() - 1];
+		content += to_string(packets[i]) + " ; ";
+	content += to_string(packets[packets.size() - 1])	;
 	return content;
 }
 

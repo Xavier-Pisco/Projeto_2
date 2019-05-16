@@ -122,7 +122,7 @@ string Packet::getContent() const
 		content += sites[i] + ", ";
 	content += sites[sites.size() - 1] + '\n';
 
-	content += begin.getContent() + end.getContent();
+	content += begin.getContent() + '\n' + end.getContent() + '\n';
 	content += to_string(pricePerPerson) + '\n';
 	content += to_string(seatsAvailable) + '\n';
 	content += to_string(seatsBought) + '\n';

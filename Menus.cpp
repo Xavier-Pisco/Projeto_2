@@ -1071,7 +1071,8 @@ void mainMenu(Agency agency)
 		cout << "[1] Dados da Agencia" << endl;
 		cout << "[2] Clientes" << endl;
 		cout << "[3] Pacotes" << endl;
-		cout << "[0] Sair" << endl;
+		cout << "[4] Cancelar alterações" << endl;
+		cout << "[0] Sair e guardar" << endl;
 		cin >> checker;
 
 		if (cin.fail())
@@ -1098,8 +1099,14 @@ void mainMenu(Agency agency)
 			packetsMenu();
 			cout << endl << setfill('*') << setw(30) << "" << endl << endl;
 		}
+
+		else if (checker == 4)
+			main();
+
 		else if (checker == 0)
 		{
+			saveClients(agency.getClientsFilename());
+			savePacks(agency.getPacketsFilename());
 			break;
 		}
 		else
