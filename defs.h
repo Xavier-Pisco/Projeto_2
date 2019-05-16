@@ -10,6 +10,8 @@
 #include <set>
 #include <sstream>
 
+#include <stdio.h>
+
 
 const std::string AGENCY_FILE_NAME="agency.txt";
 
