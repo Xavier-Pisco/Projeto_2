@@ -85,7 +85,7 @@ string Client::getPacketsIds() const
 	string content;
 	for (int i = 0; i < packets.size() - 1; i++)
 		content += to_string(packets[i]) + " ; ";
-	content += to_string(packets[packets.size() - 1])	;
+	content += to_string(packets[packets.size() - 1]) + '\n';
 	return content;
 }
 
@@ -96,7 +96,7 @@ string Client::getContent() const
 	content += to_string(VATnumber) + '\n';
 	content += to_string(familySize) + '\n';
 	content += address.getContent() + '\n';
-	content += getPacketsIds() + '\n';
+	content += getPacketsIds();
 	content += to_string(totalPurchased) + '\n';
 	return content;
 }
@@ -131,14 +131,16 @@ void Client::setPacketList(vector<int> packets){
 
 void Client::setPacketList(string packets)
 {
-	while (packets.find_first_of(';') != packets.npos)
+	if (packets.size() != 0)
 	{
-		this->packets.push_back(stoi(packets.substr(0, packets.find_first_of(';') - 1)));
-		packets.erase(0, packets.find_first_of(';') + 2);
+		while (packets.find_first_of(';') != packets.npos)
+		{
+			this->packets.push_back(stoi(packets.substr(0, packets.find_first_of(';') - 1)));
+			packets.erase(0, packets.find_first_of(';') + 2);
+		}
+		this->packets.push_back(stoi(packets.substr(0, packets.npos)));
 	}
-	this->packets.push_back(stoi(packets.substr(0, packets.npos)));
 }
-
 void Client::setTotalPurchased(unsigned totalPurchased){
   
 	this->totalPurchased = totalPurchased;
