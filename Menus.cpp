@@ -692,7 +692,9 @@ void changePacket(int i)
 			break;
 
 		else
-			cout << "Dados invalidos";
+		{
+			cout << "Dados invalidos" << endl << endl;
+		}
 
 	}
 
