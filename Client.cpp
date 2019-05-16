@@ -26,7 +26,7 @@ Client::Client(string name, unsigned VATnumber, unsigned short familySize, Addre
 
 Client::Client(string client)
 {
-	name = client.substr(0, client.find_first_of('\n'));
+	name = trim(client.substr(0, client.find_first_of('\n')));
 	client.erase(0, client.find_first_of('\n') + 1);
 
 	VATnumber = stoi(client.substr(0, client.find_first_of('\n')));

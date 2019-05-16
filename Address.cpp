@@ -15,19 +15,19 @@ Address::Address()
 
 Address::Address(string address)
 {
-	street = address.substr(0, address.find_first_of('/'));
+	street = trim(address.substr(0, address.find_first_of('/')));
 	address.erase(0, address.find_first_of('/') + 1);
 
 	doorNumber = stoi(address.substr(0, address.find_first_of('/')));
 	address.erase(0, address.find_first_of('/') + 1);
 
-	floor = address.substr(0, address.find_first_of('/'));
+	floor = trim(address.substr(0, address.find_first_of('/')));
 	address.erase(0, address.find_first_of('/') + 1);
 
-	postalCode = address.substr(0, address.find_first_of('/'));
+	postalCode = trim(address.substr(0, address.find_first_of('/')));
 	address.erase(0, address.find_first_of('/') + 1);
 
-	location = address.substr(0, address.find_first_of('/'));
+	location = trim(address.substr(0, address.find_first_of('/')));
 	address.erase(0, address.find_first_of('/') + 1);
 }
 
