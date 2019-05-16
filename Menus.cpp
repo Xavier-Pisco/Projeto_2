@@ -1,6 +1,8 @@
 #include "Menus.h"
 #include <algorithm>
 
+using namespace std;
+
 void changeClient(int i)
 {
 	int menuChecker, NIF, familySize, doorNumber;
