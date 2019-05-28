@@ -88,7 +88,8 @@ map<string, unsigned> mapMostVisited()
 
 	for (unsigned i = 0; i < vpackets.size(); i++)
 	{
-		mostVisited[vpackets[i].getAllSites()] += vpackets[i].getSeatsBought();
+		if (vpackets[i].getPacketAvailable())
+			mostVisited[vpackets[i].getAllSites()] += vpackets[i].getSeatsBought();
 	}
 
 	/*for (int i = 0; i < vclients.size(); i++)

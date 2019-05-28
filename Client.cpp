@@ -181,7 +181,7 @@ void Client::buyPacket(int packetId)
 			{
 				if (vpackets[i].getId() == packetId)
 				{
-					if (packet.getPacketAvailable())
+					if (packet.getPacketAvailable() && !(packet.getSeatsBought() + familySize > packet.getSeatsAvailable()))
 					{
 						this->totalPurchased += int(round(this->familySize * packet.getPricePerPerson()));
 						this->packets.push_back(packetId);
@@ -189,7 +189,8 @@ void Client::buyPacket(int packetId)
 						{
 							if (packetId == vpackets[x].getId())
 								vpackets[x].setSeatsBought(vpackets[x].getSeatsBought() + familySize);
-						}					cout << "Compra efetuada" << endl;
+						}
+						cout << "Compra efetuada" << endl;
 					}
 					else
 						cout << "Pacote nao tem mais lugares disponiveis" << endl;
